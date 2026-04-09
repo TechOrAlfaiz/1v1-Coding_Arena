@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0a0e1a;
+  --surface: #111827;
+  --border: #1e2d40;
+  --accent: #00d4ff;
+  --green: #00ff88;
+  --red: #ff4757;
+  --gold: #ffd700;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: #e2e8f0;
+  font-family: 'Space Grotesk', sans-serif;
+  min-height: 100vh;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #2d4a66; }
+
+/* Glow effects */
+.glow-accent { box-shadow: 0 0 15px #00d4ff40; }
+.glow-green  { box-shadow: 0 0 15px #00ff8840; }
+.glow-red    { box-shadow: 0 0 15px #ff475740; }
+.glow-gold   { box-shadow: 0 0 15px #ffd70040; }
+
+/* Button base */
+.btn {
+  @apply px-4 py-2 rounded-lg font-semibold transition-all duration-200 cursor-pointer;
+}
+.btn-accent {
+  @apply btn bg-cyan-500 text-black hover:bg-cyan-400 active:scale-95;
+}
+.btn-ghost {
+  @apply btn bg-transparent border border-slate-600 text-slate-300 hover:border-cyan-500 hover:text-cyan-400;
+}
+.btn-danger {
+  @apply btn bg-red-600 text-white hover:bg-red-500 active:scale-95;
+}
+.btn-success {
+  @apply btn bg-emerald-600 text-white hover:bg-emerald-500 active:scale-95;
+}
+
+/* Card */
+.card {
+  @apply bg-gray-900 border border-gray-800 rounded-xl p-6;
+}
+
+/* Input */
+.input {
+  @apply w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-gray-100 
+         focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 
+         transition-colors placeholder-gray-500;
+}
+
+/* Difficulty badges */
+.badge-easy   { @apply px-2 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30; }
+.badge-medium { @apply px-2 py-0.5 rounded text-xs font-bold bg-yellow-500/20 text-yellow-400 border border-yellow-500/30; }
+.badge-hard   { @apply px-2 py-0.5 rounded text-xs font-bold bg-red-500/20 text-red-400 border border-red-500/30; }
+
+/* Code font */
+code, pre, .mono { font-family: 'JetBrains Mono', monospace; }
+
+/* Animated background grid */
+.bg-grid {
+  background-image: 
+    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Timer colors */
+.timer-normal  { color: #e2e8f0; }
+.timer-warning { color: #ffd700; animation: pulse 1s infinite; }
+.timer-danger  { color: #ff4757; animation: pulse 0.5s infinite; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.6; }
+}
