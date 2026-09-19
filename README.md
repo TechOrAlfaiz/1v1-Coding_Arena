@@ -17,6 +17,21 @@
 
 </div>
 
+## 🔗 Live Deployments & Demo
+
+| Service | Platform | Live URL | Description | Status |
+| :--- | :--- | :--- | :--- | :---: |
+| **Frontend Web App** | **Vercel** | **[https://client-rust-kappa-90.vercel.app](https://client-rust-kappa-90.vercel.app)** | Production SPA (1v1 Arena, AI Mock Interview, Leaderboard) | 🟢 **Live** |
+| **Backend API & Sockets** | **Render** | **[https://coding-arena-api.onrender.com](https://coding-arena-api.onrender.com)** | Node/Express + Socket.IO Server ([Health Check](https://coding-arena-api.onrender.com/api/health)) | 🟢 **Live** |
+| **Database Cluster** | **MongoDB Atlas** | `cluster0.s88pomd.mongodb.net` | 3,480+ indexed problems, matches, user ELO | 🟢 **Connected** |
+
+> 💡 **Ready-to-Use Test Account:**
+> - **Email:** `prod_gladiator_1@arena.dev`
+> - **Password:** `Password123!`
+> *(Or create a brand new gladiator profile instantly on the platform!)*
+
+---
+
 ## 🌟 Overview
 
 **1v1 Coding Arena** is a full-stack, cloud-deployed platform engineered for competitive programmers and software engineers preparing for high-stakes technical interviews at Tier-1 tech companies.
