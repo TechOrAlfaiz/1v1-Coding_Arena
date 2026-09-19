@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: coding-arena-backend
+    runtime: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node index.js
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: CLIENT_URL
+        value: https://client-fhgkpkoyi-mohdalfaiz1245-9886s-projects.vercel.app,https://client-*.vercel.app,http://localhost:3000
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
