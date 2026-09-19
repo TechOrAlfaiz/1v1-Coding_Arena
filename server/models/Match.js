@@ -21,14 +21,21 @@ const matchSchema = new mongoose.Schema({
       solved: { type: Boolean, default: false },
       // When did they submit?
       solvedAt: { type: Date },
-      // ELO before this match
+      // Rating / ELO before this match
+      ratingAtMatch: { type: Number },
+      ratingChange: { type: Number, default: 0 },
       eloAtMatch: { type: Number },
-      // ELO change after this match
       eloChange: { type: Number, default: 0 },
       // Their submitted code
       lastCode: { type: String, default: '' },
       // Language used
       language: { type: String, default: 'javascript' },
+      // Submission metrics for post-match approach diff
+      executionTime: { type: Number, default: 0 },
+      memory: { type: Number, default: 0 },
+      linesOfCode: { type: Number, default: 0 },
+      passedTests: { type: Number, default: 0 },
+      totalTests: { type: Number, default: 0 },
     },
   ],
   // The coding question used in this match
@@ -48,6 +55,12 @@ const matchSchema = new mongoose.Schema({
     enum: ['room', 'ranked', 'casual'],
     default: 'room',
   },
+  // Interview battle mode
+  mode: {
+    type: String,
+    enum: ['coding', 'system_design', 'behavioral'],
+    default: 'coding',
+  },
   // Winner (null = draw or ongoing)
   winner: {
     type: mongoose.Schema.Types.ObjectId,
@@ -66,11 +79,22 @@ const matchSchema = new mongoose.Schema({
   endedAt: { type: Date },
   // Duration limit in seconds (default 15 minutes)
   durationLimit: { type: Number, default: 900 },
+  // Interviewer Swap Round Q&A transcript
+  transcript: [
+    {
+      sender: { type: String },
+      role: { type: String, enum: ['interviewer', 'candidate', 'system'] },
+      text: { type: String },
+      timestamp: { type: Date, default: Date.now },
+    },
+  ],
   createdAt: { type: Date, default: Date.now },
 });
 
 // Index for faster queries
 matchSchema.index({ createdAt: -1 });
 matchSchema.index({ 'players.userId': 1 });
+matchSchema.index({ status: 1 });
+matchSchema.index({ 'players.userId': 1, status: 1, endedAt: -1 });
 
 module.exports = mongoose.model('Match', matchSchema);

@@ -17,42 +17,52 @@ export const SocketProvider = ({ children }) => {
   const socketRef = useRef(null);
   const [connected, setConnected] = useState(false);
 
+  const userId = user?.id || user?._id;
+
   useEffect(() => {
-    if (user) {
-      // Create socket with JWT auth
-      const token = getToken();
-      socketRef.current = io(SOCKET_URL, {
-        auth: { token },
-        transports: ['websocket', 'polling'],
-        reconnection: true,
-        reconnectionAttempts: 5,
-        reconnectionDelay: 1000,
-      });
-
-      socketRef.current.on('connect', () => {
-        console.log('🔌 Socket connected:', socketRef.current.id);
-        setConnected(true);
-      });
-
-      socketRef.current.on('disconnect', () => {
-        console.log('🔌 Socket disconnected');
+    if (!userId) {
+      if (socketRef.current) {
+        socketRef.current.disconnect();
+        socketRef.current = null;
         setConnected(false);
-      });
-
-      socketRef.current.on('connect_error', (err) => {
-        console.error('Socket connection error:', err.message);
-        setConnected(false);
-      });
-
-      return () => {
-        if (socketRef.current) {
-          socketRef.current.disconnect();
-          socketRef.current = null;
-          setConnected(false);
-        }
-      };
+      }
+      return;
     }
-  }, [user]);
+
+    // Reuse existing active or connecting socket instance
+    if (socketRef.current) return;
+
+    const token = getToken();
+    const socket = io(SOCKET_URL, {
+      auth: { token },
+      transports: ['websocket', 'polling'],
+      reconnection: true,
+      reconnectionAttempts: 5,
+      reconnectionDelay: 1000,
+      timeout: 20000,
+    });
+
+    socketRef.current = socket;
+
+    socket.on('connect', () => {
+      console.log('🔌 Socket connected:', socket.id);
+      setConnected(true);
+    });
+
+    socket.on('disconnect', (reason) => {
+      console.log('🔌 Socket disconnected:', reason);
+      setConnected(false);
+    });
+
+    socket.on('connect_error', (err) => {
+      console.error('Socket connection error:', err.message);
+      setConnected(false);
+    });
+
+    return () => {
+      // Avoid tearing down in-flight connection on React 18 StrictMode dev double-mount
+    };
+  }, [userId, getToken]);
 
   return (
     <SocketContext.Provider value={{ socket: socketRef.current, connected }}>

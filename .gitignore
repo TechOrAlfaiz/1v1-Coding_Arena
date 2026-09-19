@@ -15,6 +15,12 @@ client/build/
 *.log
 npm-debug.log*
 
+# Temp directories & files
+server/temp/*
+!server/temp/.gitkeep
+temp/
+server/data/sources/
+
 # OS files
 .DS_Store
 Thumbs.db

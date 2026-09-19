@@ -29,7 +29,7 @@ exports.calculateElo = (playerElo, opponentElo, result, kFactor = 32) => {
   // Expected score (probability of winning based on ELO difference)
   const expectedScore = 1 / (1 + Math.pow(10, (opponentElo - playerElo) / 400));
   
-  // New ELO
+  // New ELO: winner gains, loser loses, scaled by rating difference
   const newElo = Math.round(playerElo + kFactor * (result - expectedScore));
   
   // Minimum ELO is 100
@@ -37,13 +37,32 @@ exports.calculateElo = (playerElo, opponentElo, result, kFactor = 32) => {
 };
 
 /**
- * Get K-factor based on number of matches played
- * New players have higher K (more volatile), experienced lower
+ * Get K-factor based on number of matches played (standard K ~ 32)
  */
-exports.getKFactor = (totalMatches) => {
-  if (totalMatches < 10) return 40; // New player - high volatility
-  if (totalMatches < 30) return 32; // Regular player
-  return 24; // Experienced player - lower volatility
+exports.getKFactor = (totalMatches = 0) => {
+  if (totalMatches < 10) return 32; // Standard / active
+  if (totalMatches < 30) return 32;
+  return 24; // Experienced player
+};
+
+/**
+ * Rank tier mapping (Bronze to Grandmaster)
+ * Rating bands:
+ * - Bronze: < 1000
+ * - Silver: 1000 - 1199
+ * - Gold: 1200 - 1399
+ * - Platinum: 1400 - 1599
+ * - Diamond: 1600 - 1799
+ * - Grandmaster: 1800+
+ */
+exports.getRankTier = (rating = 1000) => {
+  const r = Number(rating) || 1000;
+  if (r >= 1800) return { name: 'Grandmaster', tier: 'GRANDMASTER', color: 'text-rose-400', border: 'border-rose-500/40', bg: 'bg-rose-500/10' };
+  if (r >= 1600) return { name: 'Diamond', tier: 'DIAMOND', color: 'text-cyan-400', border: 'border-cyan-500/40', bg: 'bg-cyan-500/10' };
+  if (r >= 1400) return { name: 'Platinum', tier: 'PLATINUM', color: 'text-teal-400', border: 'border-teal-500/40', bg: 'bg-teal-500/10' };
+  if (r >= 1200) return { name: 'Gold', tier: 'GOLD', color: 'text-amber-400', border: 'border-amber-500/40', bg: 'bg-amber-500/10' };
+  if (r >= 1000) return { name: 'Silver', tier: 'SILVER', color: 'text-slate-300', border: 'border-slate-400/40', bg: 'bg-slate-400/10' };
+  return { name: 'Bronze', tier: 'BRONZE', color: 'text-amber-600', border: 'border-amber-700/40', bg: 'bg-amber-700/10' };
 };
 
 /**

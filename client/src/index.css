@@ -1,16 +1,48 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --bg: #0a0e1a;
-  --surface: #111827;
-  --border: #1e2d40;
-  --accent: #00d4ff;
-  --green: #00ff88;
-  --red: #ff4757;
-  --gold: #ffd700;
+  /* Developer Tool Design Tokens */
+  --bg-base: #10141C;
+  --bg: #10141C;
+  --bg-deep: #10141C;
+  
+  --surface: #161B22;
+  --surface-raised: #1C2230;
+  --surface-hover: #1E2533;
+
+  --border: #262D3D;
+  --border-subtle: #1C2230;
+  --border-active: #3D485E;
+
+  --text-primary: #E6E8EB;
+  --text-secondary: #8B93A1;
+  --text-tertiary: #5B6373;
+
+  --accent: #4FA393;
+  --accent-hover: #5DB5A4;
+  --accent-subtle: rgba(79, 163, 147, 0.12);
+
+  --accent-secondary: #E3B341;
+  --accent-secondary-subtle: rgba(227, 179, 65, 0.12);
+
+  --success: #4FA393;
+  --success-subtle: rgba(79, 163, 147, 0.12);
+
+  --error: #D9736A;
+  --error-subtle: rgba(217, 115, 106, 0.12);
+
+  /* Legacy aliases mapped to tokens */
+  --surface-glass: #161B22;
+  --border-glass: #262D3D;
+  --accent-glow: #4FA393;
+  --green: #4FA393;
+  --red: #D9736A;
+  --gold: #E3B341;
+  --purple: #1C2230;
+  --pink: #D9736A;
 }
 
 * {
@@ -19,75 +51,285 @@
 
 body {
   margin: 0;
-  background-color: var(--bg);
-  color: #e2e8f0;
-  font-family: 'Space Grotesk', sans-serif;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbar */
+/* Custom quiet scrollbar */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: var(--surface); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #2d4a66; }
-
-/* Glow effects */
-.glow-accent { box-shadow: 0 0 15px #00d4ff40; }
-.glow-green  { box-shadow: 0 0 15px #00ff8840; }
-.glow-red    { box-shadow: 0 0 15px #ff475740; }
-.glow-gold   { box-shadow: 0 0 15px #ffd70040; }
-
-/* Button base */
-.btn {
-  @apply px-4 py-2 rounded-lg font-semibold transition-all duration-200 cursor-pointer;
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { 
+  background: var(--border); 
+  border-radius: 4px; 
 }
-.btn-accent {
-  @apply btn bg-cyan-500 text-black hover:bg-cyan-400 active:scale-95;
-}
-.btn-ghost {
-  @apply btn bg-transparent border border-slate-600 text-slate-300 hover:border-cyan-500 hover:text-cyan-400;
-}
-.btn-danger {
-  @apply btn bg-red-600 text-white hover:bg-red-500 active:scale-95;
-}
-.btn-success {
-  @apply btn bg-emerald-600 text-white hover:bg-emerald-500 active:scale-95;
+::-webkit-scrollbar-thumb:hover { 
+  background: var(--text-secondary); 
 }
 
-/* Card */
+/* Panel & Card primitives — defined by subtle borders (#262D3D), no heavy glows */
+.glass-panel,
+.glass-panel-glow,
+.glass-card,
 .card {
-  @apply bg-gray-900 border border-gray-800 rounded-xl p-6;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: none;
 }
 
-/* Input */
+.glass-panel-glow {
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.glass-card:hover,
+.glass-panel:hover {
+  border-color: var(--border-active);
+}
+
+/* Glow classes silenced to clean border-based focus */
+.glow-accent, .glow-green, .glow-red, .glow-gold, .glow-purple {
+  box-shadow: none;
+}
+
+/* Text helpers */
+.text-gradient-cyan,
+.text-gradient-neon,
+.text-gradient-gold {
+  background: none;
+  -webkit-text-fill-color: initial;
+  color: var(--text-primary);
+}
+
+/* Button system */
+.btn {
+  @apply px-3.5 py-2 rounded-lg font-medium text-xs transition-colors duration-150 cursor-pointer inline-flex items-center justify-center gap-2;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-accent {
+  background-color: var(--accent);
+  color: #0E121A;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+.btn-accent:hover {
+  background-color: var(--accent-hover);
+}
+
+.btn-neon {
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+.btn-neon:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+.btn-ghost:hover {
+  background-color: var(--surface);
+  border-color: var(--border-active);
+  color: var(--text-primary);
+}
+
+.btn-danger {
+  background-color: var(--error-subtle);
+  border: 1px solid rgba(217, 115, 106, 0.4);
+  color: var(--error);
+}
+.btn-danger:hover {
+  background-color: var(--error);
+  color: #FFFFFF;
+}
+
+.btn-success {
+  background-color: var(--accent);
+  color: #0E121A;
+  font-weight: 600;
+}
+.btn-success:hover {
+  background-color: var(--accent-hover);
+}
+
+/* Input fields */
 .input {
-  @apply w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-gray-100 
-         focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 
-         transition-colors placeholder-gray-500;
+  @apply w-full rounded-lg px-3 py-2 text-xs transition-colors;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+}
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.input::placeholder {
+  color: var(--text-secondary);
+}
+
+/* Leading icon pattern — guarantees fixed space so placeholder never collides */
+.input-has-icon,
+.relative > input.pl-10,
+.relative > input.pl-9,
+.relative > input.pl-8,
+.relative > input.pl-11 {
+  padding-left: 2.75rem !important;
+}
+
+.input-icon-left {
+  position: absolute;
+  left: 0.875rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1rem;
+  height: 1rem;
+  pointer-events: none;
+  z-index: 5;
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+}
+
+.relative:focus-within > .input-icon-left {
+  color: var(--accent);
 }
 
 /* Difficulty badges */
-.badge-easy   { @apply px-2 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30; }
-.badge-medium { @apply px-2 py-0.5 rounded text-xs font-bold bg-yellow-500/20 text-yellow-400 border border-yellow-500/30; }
-.badge-hard   { @apply px-2 py-0.5 rounded text-xs font-bold bg-red-500/20 text-red-400 border border-red-500/30; }
-
-/* Code font */
-code, pre, .mono { font-family: 'JetBrains Mono', monospace; }
-
-/* Animated background grid */
-.bg-grid {
-  background-image: 
-    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
+.badge-easy {
+  background-color: var(--accent-subtle);
+  color: var(--accent);
+  border: 1px solid rgba(79, 163, 147, 0.3);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.375rem;
+}
+.badge-medium {
+  background-color: var(--accent-secondary-subtle);
+  color: var(--accent-secondary);
+  border: 1px solid rgba(227, 179, 65, 0.3);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.375rem;
+}
+.badge-hard {
+  background-color: var(--error-subtle);
+  color: var(--error);
+  border: 1px solid rgba(217, 115, 106, 0.3);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.375rem;
 }
 
-/* Timer colors */
-.timer-normal  { color: #e2e8f0; }
-.timer-warning { color: #ffd700; animation: pulse 1s infinite; }
-.timer-danger  { color: #ff4757; animation: pulse 0.5s infinite; }
+/* Monospace fonts strictly for code, stats, timers, data */
+code, pre, .mono, .font-mono {
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', Menlo, Consolas, monospace;
+}
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.6; }
+/* Subtle dev-tool grid overlay */
+.bg-grid {
+  background-image: 
+    linear-gradient(rgba(38, 45, 61, 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(38, 45, 61, 0.35) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Timers without glowing shadows */
+.timer-normal { 
+  color: var(--text-primary); 
+  font-family: 'JetBrains Mono', monospace;
+}
+.timer-warning { 
+  color: var(--accent-secondary); 
+  font-family: 'JetBrains Mono', monospace;
+}
+.timer-danger { 
+  color: var(--error); 
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Minimal marquee for developer log */
+@keyframes marquee-scroll {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee-infinite {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 40s linear infinite;
+}
+
+.animate-marquee-infinite:hover {
+  animation-play-state: paused;
+}
+
+/* Clean voice bar */
+@keyframes soundwave {
+  0%, 100% { height: 4px; opacity: 0.4; }
+  50% { height: 18px; opacity: 0.9; }
+}
+
+.wave-bar {
+  display: inline-block;
+  width: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+  animation: soundwave 1s ease-in-out infinite alternate;
+}
+
+/* Radar scanner animations */
+@keyframes radarSweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes radarPingBlip {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  35% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  70% {
+    transform: scale(1.4);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes radarPulseRing {
+  0% {
+    transform: scale(0.2);
+    opacity: 0.8;
+  }
+  60% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
 }

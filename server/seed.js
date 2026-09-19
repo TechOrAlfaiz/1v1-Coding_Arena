@@ -17,6 +17,8 @@ const questions = [
     title: 'Two Sum',
     difficulty: 'easy',
     tags: ['arrays', 'hash-map'],
+    companyTags: ['Google', 'Amazon', 'Meta'],
+    idealSolveTime: 15,
     description: `Given an array of integers \`nums\` and an integer \`target\`, return the **indices** of the two numbers such that they add up to target.
 
 You may assume that each input would have **exactly one solution**, and you may not use the same element twice.
@@ -45,7 +47,7 @@ You may assume that each input would have **exactly one solution**, and you may 
     ],
     starterCode: {
       javascript: `// Read input from stdin
-const lines = require('fs').readFileSync('/dev/stdin', 'utf8').trim().split('\\n');
+const lines = require('fs').readFileSync(0, 'utf8').trim().split('\\n');
 const n = parseInt(lines[0]);
 const nums = lines[1].split(' ').map(Number);
 const target = parseInt(lines[2]);
@@ -104,6 +106,8 @@ public class Solution {
     title: 'Reverse a String',
     difficulty: 'easy',
     tags: ['strings'],
+    companyTags: ['Microsoft', 'Amazon', 'Apple'],
+    idealSolveTime: 10,
     description: `Write a function that reverses a string. The input is given as a single line string.
 
 **Constraints:**
@@ -120,7 +124,7 @@ public class Solution {
       { input: 'a', expectedOutput: 'a' },
     ],
     starterCode: {
-      javascript: `const s = require('fs').readFileSync('/dev/stdin', 'utf8').trim();
+      javascript: `const s = require('fs').readFileSync(0, 'utf8').trim();
 
 function reverseString(s) {
     // Write your solution here
@@ -158,6 +162,8 @@ public class Solution {
     title: 'FizzBuzz',
     difficulty: 'easy',
     tags: ['math', 'strings'],
+    companyTags: ['Google', 'Bloomberg', 'Capital One'],
+    idealSolveTime: 10,
     description: `Given an integer \`n\`, print the numbers from 1 to n with the following rules:
 - If the number is divisible by **3**, print \`Fizz\`
 - If the number is divisible by **5**, print \`Buzz\`
@@ -181,7 +187,7 @@ Each result should be on a new line.
       { input: '1', expectedOutput: '1' },
     ],
     starterCode: {
-      javascript: `const n = parseInt(require('fs').readFileSync('/dev/stdin', 'utf8').trim());
+      javascript: `const n = parseInt(require('fs').readFileSync(0, 'utf8').trim());
 
 for(let i = 1; i <= n; i++) {
     // Write your solution here
@@ -215,6 +221,8 @@ public class Solution {
     title: 'Maximum Subarray',
     difficulty: 'medium',
     tags: ['arrays', 'dynamic-programming'],
+    companyTags: ['Amazon', 'Microsoft', 'Google'],
+    idealSolveTime: 25,
     description: `Given an integer array \`nums\`, find the **contiguous subarray** (containing at least one number) which has the largest sum and return its sum. This is the classic **Kadane's Algorithm** problem.
 
 **Constraints:**
@@ -236,7 +244,7 @@ public class Solution {
       { input: '4\n-3 -2 -1 -4', expectedOutput: '-1' },
     ],
     starterCode: {
-      javascript: `const lines = require('fs').readFileSync('/dev/stdin', 'utf8').trim().split('\\n');
+      javascript: `const lines = require('fs').readFileSync(0, 'utf8').trim().split('\\n');
 const n = parseInt(lines[0]);
 const nums = lines[1].split(' ').map(Number);
 
@@ -282,6 +290,8 @@ public class Solution {
     title: 'Valid Parentheses',
     difficulty: 'medium',
     tags: ['stack', 'strings'],
+    companyTags: ['Meta', 'Amazon', 'Google', 'Bloomberg'],
+    idealSolveTime: 20,
     description: `Given a string \`s\` containing just the characters \`(\`, \`)\`, \`{\`, \`}\`, \`[\` and \`]\`, determine if the input string is **valid**.
 
 An input string is valid if:
@@ -302,7 +312,7 @@ Print \`true\` if valid, \`false\` otherwise.`,
       { input: '{[]}', expectedOutput: 'true' },
     ],
     starterCode: {
-      javascript: `const s = require('fs').readFileSync('/dev/stdin', 'utf8').trim();
+      javascript: `const s = require('fs').readFileSync(0, 'utf8').trim();
 
 function isValid(s) {
     // Use a stack!
@@ -337,10 +347,13 @@ public class Solution {
   },
 ];
 
-async function seed() {
+async function seed(disconnectAfter = true) {
   try {
-    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/coding_arena');
-    console.log('✅ Connected to MongoDB');
+    if (mongoose.connection.readyState !== 1) {
+      const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/coding_arena';
+      await mongoose.connect(uri, { serverSelectionTimeoutMS: 4000 });
+      console.log('✅ Connected to MongoDB');
+    }
 
     // Clear existing questions
     await Question.deleteMany({});
@@ -355,12 +368,19 @@ async function seed() {
       console.log(`  ${i + 1}. [${q.difficulty.toUpperCase()}] ${q.title}`);
     });
 
-    await mongoose.disconnect();
-    console.log('\n✅ Database seeding complete! You can now start the server.');
+    if (disconnectAfter) {
+      await mongoose.disconnect();
+      console.log('\n✅ Database seeding complete!');
+    }
+    return inserted;
   } catch (error) {
     console.error('❌ Seeding failed:', error);
-    process.exit(1);
+    if (disconnectAfter) process.exit(1);
   }
 }
 
-seed();
+if (require.main === module) {
+  seed(true);
+}
+
+module.exports = seed;

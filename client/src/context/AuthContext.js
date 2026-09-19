@@ -11,27 +11,63 @@ const AuthContext = createContext(null);
 
 const API_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:5000';
 
+// Global request interceptor to dynamically inject token
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem('arena_token') || localStorage.getItem('token');
+  if (token && !config.headers['Authorization']) {
+    config.headers['Authorization'] = `Bearer ${token}`;
+  }
+  return config;
+}, (error) => Promise.reject(error));
+
+// Global response interceptor to handle stale tokens
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      localStorage.removeItem('arena_token');
+      localStorage.removeItem('arena_user');
+      delete axios.defaults.headers.common['Authorization'];
+    }
+    return Promise.reject(error);
+  }
+);
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true); // True while checking stored token
 
-  // On mount: check if there's a stored token and validate it
+  // On mount: check if there's a stored token and validate it with server
   useEffect(() => {
-    const token = localStorage.getItem('arena_token');
-    const storedUser = localStorage.getItem('arena_user');
+    const initAuth = async () => {
+      const token = localStorage.getItem('arena_token');
+      const storedUser = localStorage.getItem('arena_user');
 
-    if (token && storedUser) {
-      try {
-        setUser(JSON.parse(storedUser));
-        // Set default auth header for all axios requests
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      } catch (e) {
-        // Corrupted storage, clear it
-        localStorage.removeItem('arena_token');
-        localStorage.removeItem('arena_user');
+      if (token && storedUser) {
+        try {
+          const parsed = JSON.parse(storedUser);
+          setUser(parsed);
+          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+          // Verify with backend to prevent stale user ID across server restarts
+          const res = await axios.get(`${API_URL}/api/auth/me`, {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          if (res.data?.user) {
+            setUser(res.data.user);
+            localStorage.setItem('arena_user', JSON.stringify(res.data.user));
+          }
+        } catch (e) {
+          localStorage.removeItem('arena_token');
+          localStorage.removeItem('arena_user');
+          delete axios.defaults.headers.common['Authorization'];
+          setUser(null);
+        }
       }
-    }
-    setLoading(false);
+      setLoading(false);
+    };
+
+    initAuth();
   }, []);
 
   // Register a new account

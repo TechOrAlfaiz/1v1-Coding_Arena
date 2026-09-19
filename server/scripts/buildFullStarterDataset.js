@@ -1,0 +1,681 @@
+/**
+ * Generates the expanded 100+ original coding problems dataset
+ * for the 1v1 Coding Arena platform.
+ * Tagged company-wise (Google, Amazon, Meta, Microsoft, Apple, Uber, Netflix, Bloomberg, etc.)
+ * and topic-wise (Arrays, Two Pointers, Sliding Window, Stack, Binary Search, Linked List,
+ * Trees, Graphs, DP, Intervals, Greedy, Bit Manipulation, Math).
+ */
+
+const fs = require('fs');
+const path = require('path');
+
+// Base 17 problems from generateStarterProblems
+const { execSync } = require('child_process');
+
+const starterList = [
+  // 1. Arrays & Hashing
+  {
+    title: 'Two Sum Target',
+    slug: 'two-sum-target',
+    difficulty: 'easy',
+    topics: ['Array', 'Hash Table'],
+    companies: ['Google', 'Amazon', 'Meta', 'Microsoft', 'Apple'],
+    sourceLink: 'https://leetcode.com/problems/two-sum/',
+    description: 'Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.',
+    testCases: [
+      { input: '4\n2 7 11 15\n9', expectedOutput: '0 1' },
+      { input: '3\n3 2 4\n6', expectedOutput: '1 2' },
+      { input: '2\n3 3\n6', expectedOutput: '0 1' }
+    ]
+  },
+  {
+    title: 'Anagram String Verification',
+    slug: 'anagram-string-verification',
+    difficulty: 'easy',
+    topics: ['String', 'Hash Table', 'Sorting'],
+    companies: ['Google', 'Amazon', 'Meta', 'Uber'],
+    sourceLink: 'https://leetcode.com/problems/valid-anagram/',
+    description: 'Given two strings s and t, return true if t is an anagram of s, and false otherwise.',
+    testCases: [
+      { input: 'anagram\nnagaram', expectedOutput: 'true' },
+      { input: 'rat\ncar', expectedOutput: 'false' },
+      { input: 'a\na', expectedOutput: 'true' }
+    ]
+  },
+  {
+    title: 'Contains Duplicate Elements',
+    slug: 'contains-duplicate-elements',
+    difficulty: 'easy',
+    topics: ['Array', 'Hash Table', 'Sorting'],
+    companies: ['Apple', 'Amazon', 'Google', 'Microsoft'],
+    sourceLink: 'https://leetcode.com/problems/contains-duplicate/',
+    description: 'Given an integer array nums, return true if any value appears at least twice in the array.',
+    testCases: [
+      { input: '4\n1 2 3 1', expectedOutput: 'true' },
+      { input: '4\n1 2 3 4', expectedOutput: 'false' },
+      { input: '6\n1 1 1 3 3 4', expectedOutput: 'true' }
+    ]
+  },
+  {
+    title: 'Top K Frequent Elements',
+    slug: 'top-k-frequent-elements',
+    difficulty: 'medium',
+    topics: ['Array', 'Hash Table', 'Heap'],
+    companies: ['Amazon', 'Meta', 'Google', 'Apple', 'Uber'],
+    sourceLink: 'https://leetcode.com/problems/top-k-frequent-elements/',
+    description: 'Given an integer array nums and an integer k, return the k most frequent elements in ascending sorted order.',
+    testCases: [
+      { input: '6 2\n1 1 1 2 2 3', expectedOutput: '1 2' },
+      { input: '1 1\n1', expectedOutput: '1' },
+      { input: '4 2\n4 4 2 2', expectedOutput: '2 4' }
+    ]
+  },
+  {
+    title: 'Product of Array Except Self',
+    slug: 'product-of-array-except-self',
+    difficulty: 'medium',
+    topics: ['Array', 'Prefix Sum'],
+    companies: ['Amazon', 'Meta', 'Apple', 'Microsoft', 'Google', 'Uber'],
+    sourceLink: 'https://leetcode.com/problems/product-of-array-except-self/',
+    description: 'Given an integer array nums, return an array answer such that answer[i] is equal to the product of all elements of nums except nums[i].',
+    testCases: [
+      { input: '4\n1 2 3 4', expectedOutput: '24 12 8 6' },
+      { input: '5\n-1 1 0 -3 3', expectedOutput: '0 0 9 0 0' }
+    ]
+  },
+  {
+    title: 'Longest Consecutive Elements Sequence',
+    slug: 'longest-consecutive-elements-sequence',
+    difficulty: 'medium',
+    topics: ['Array', 'Hash Table', 'Union Find'],
+    companies: ['Google', 'Amazon', 'Meta', 'Microsoft', 'Spotify'],
+    sourceLink: 'https://leetcode.com/problems/longest-consecutive-sequence/',
+    description: 'Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence in O(n) time.',
+    testCases: [
+      { input: '6\n100 4 200 1 3 2', expectedOutput: '4' },
+      { input: '10\n0 3 7 2 5 8 4 6 0 1', expectedOutput: '9' }
+    ]
+  },
+  {
+    title: 'Group Anagrams by Signature',
+    slug: 'group-anagrams-by-signature',
+    difficulty: 'medium',
+    topics: ['Array', 'Hash Table', 'String', 'Sorting'],
+    companies: ['Amazon', 'Apple', 'Google', 'Meta', 'Bloomberg', 'Uber'],
+    sourceLink: 'https://leetcode.com/problems/group-anagrams/',
+    description: 'Given an array of strings strs, group the anagrams together and return the count of distinct anagram groups.',
+    testCases: [
+      { input: '6\neat tea tan ate nat bat', expectedOutput: '3' },
+      { input: '1\na', expectedOutput: '1' }
+    ]
+  },
+
+  // 2. Two Pointers
+  {
+    title: 'Valid Palindrome Filter',
+    slug: 'valid-palindrome-filter',
+    difficulty: 'easy',
+    topics: ['Two Pointers', 'String'],
+    companies: ['Meta', 'Microsoft', 'Amazon', 'Apple', 'Google'],
+    sourceLink: 'https://leetcode.com/problems/valid-palindrome/',
+    description: 'Given a string s, return true if it is a palindrome after converting uppercase to lowercase and removing non-alphanumerics.',
+    testCases: [
+      { input: 'A man, a plan, a canal: Panama', expectedOutput: 'true' },
+      { input: 'race a car', expectedOutput: 'false' },
+      { input: ' ', expectedOutput: 'true' }
+    ]
+  },
+  {
+    title: 'Two Sum II - Input Array Is Sorted',
+    slug: 'two-sum-ii-input-array-is-sorted',
+    difficulty: 'medium',
+    topics: ['Array', 'Two Pointers', 'Binary Search'],
+    companies: ['Amazon', 'Google', 'Apple', 'Bloomberg'],
+    sourceLink: 'https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/',
+    description: 'Given a 1-indexed sorted array of integers nums, find two numbers that add up to target using O(1) extra space.',
+    testCases: [
+      { input: '4\n2 7 11 15\n9', expectedOutput: '1 2' },
+      { input: '3\n2 3 4\n6', expectedOutput: '1 3' },
+      { input: '2\n-1 0\n-1', expectedOutput: '1 2' }
+    ]
+  },
+  {
+    title: 'Three Sum Zero Triplet Count',
+    slug: 'three-sum-zero-triplet-count',
+    difficulty: 'medium',
+    topics: ['Array', 'Two Pointers', 'Sorting'],
+    companies: ['Meta', 'Amazon', 'Google', 'Apple', 'Microsoft', 'Bloomberg'],
+    sourceLink: 'https://leetcode.com/problems/3sum/',
+    description: 'Given an integer array nums, return the count of unique triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.',
+    testCases: [
+      { input: '6\n-1 0 1 2 -1 -4', expectedOutput: '2' },
+      { input: '3\n0 1 1', expectedOutput: '0' },
+      { input: '3\n0 0 0', expectedOutput: '1' }
+    ]
+  },
+  {
+    title: 'Container With Most Water',
+    slug: 'container-with-most-water',
+    difficulty: 'medium',
+    topics: ['Two Pointers', 'Array', 'Greedy'],
+    companies: ['Amazon', 'Google', 'Meta', 'Apple', 'Bloomberg'],
+    sourceLink: 'https://leetcode.com/problems/container-with-most-water/',
+    description: 'Given n non-negative integers height, find two lines that together with the x-axis form a container that contains the most water.',
+    testCases: [
+      { input: '9\n1 8 6 2 5 4 8 3 7', expectedOutput: '49' },
+      { input: '2\n1 1', expectedOutput: '1' }
+    ]
+  },
+  {
+    title: 'Trapping Rain Water Height',
+    slug: 'trapping-rain-water-height',
+    difficulty: 'hard',
+    topics: ['Two Pointers', 'Dynamic Programming', 'Stack', 'Monotonic Stack'],
+    companies: ['Google', 'Amazon', 'Meta', 'Goldman Sachs', 'Bloomberg', 'Apple'],
+    sourceLink: 'https://leetcode.com/problems/trapping-rain-water/',
+    description: 'Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.',
+    testCases: [
+      { input: '12\n0 1 0 2 1 0 1 3 2 1 2 1', expectedOutput: '6' },
+      { input: '6\n4 2 0 3 2 5', expectedOutput: '9' }
+    ]
+  },
+
+  // 3. Sliding Window
+  {
+    title: 'Best Time to Buy and Sell Stock',
+    slug: 'best-time-to-buy-and-sell-stock',
+    difficulty: 'easy',
+    topics: ['Array', 'Dynamic Programming', 'Sliding Window'],
+    companies: ['Amazon', 'Meta', 'Google', 'Apple', 'Microsoft', 'Bloomberg'],
+    sourceLink: 'https://leetcode.com/problems/best-time-to-buy-and-sell-stock/',
+    description: 'You are given an array prices where prices[i] is the price of a given stock on the ith day. Return the maximum profit you can achieve.',
+    testCases: [
+      { input: '6\n7 1 5 3 6 4', expectedOutput: '5' },
+      { input: '5\n7 6 4 3 1', expectedOutput: '0' }
+    ]
+  },
+  {
+    title: 'Longest Substring Without Repeating Characters',
+    slug: 'longest-substring-without-repeating-characters',
+    difficulty: 'medium',
+    topics: ['Sliding Window', 'Hash Table', 'String'],
+    companies: ['Amazon', 'Google', 'Bloomberg', 'Meta', 'Microsoft'],
+    sourceLink: 'https://leetcode.com/problems/longest-substring-without-repeating-characters/',
+    description: 'Given a string s, find the length of the longest substring without repeating characters.',
+    testCases: [
+      { input: 'abcabcbb', expectedOutput: '3' },
+      { input: 'bbbbb', expectedOutput: '1' },
+      { input: 'pwwkew', expectedOutput: '3' }
+    ]
+  },
+  {
+    title: 'Longest Repeating Character Replacement',
+    slug: 'longest-repeating-character-replacement',
+    difficulty: 'medium',
+    topics: ['Hash Table', 'String', 'Sliding Window'],
+    companies: ['Google', 'Amazon', 'Meta', 'Uber'],
+    sourceLink: 'https://leetcode.com/problems/longest-repeating-character-replacement/',
+    description: 'You are given a string s and an integer k. You can choose any character of the string and change it to any other uppercase English character at most k times. Return length of longest substring of same letter.',
+    testCases: [
+      { input: '4 2\nABAB', expectedOutput: '4' },
+      { input: '7 1\nAABABBA', expectedOutput: '4' }
+    ]
+  },
+  {
+    title: 'Permutation in String Verification',
+    slug: 'permutation-in-string-verification',
+    difficulty: 'medium',
+    topics: ['Hash Table', 'Two Pointers', 'String', 'Sliding Window'],
+    companies: ['Microsoft', 'Amazon', 'Meta', 'Apple'],
+    sourceLink: 'https://leetcode.com/problems/permutation-in-string/',
+    description: 'Given two strings s1 and s2, return true if s2 contains a permutation of s1, or false otherwise.',
+    testCases: [
+      { input: 'ab\neidbaooo', expectedOutput: 'true' },
+      { input: 'ab\neidboaoo', expectedOutput: 'false' }
+    ]
+  },
+  {
+    title: 'Minimum Window Substring Length',
+    slug: 'minimum-window-substring-length',
+    difficulty: 'hard',
+    topics: ['Hash Table', 'String', 'Sliding Window'],
+    companies: ['Meta', 'Amazon', 'Google', 'Airbnb', 'LinkedIn', 'Uber'],
+    sourceLink: 'https://leetcode.com/problems/minimum-window-substring/',
+    description: 'Given two strings s and t, return the minimum length of a substring of s such that every character in t (including duplicates) is included. Return 0 if no such window exists.',
+    testCases: [
+      { input: 'ADOBECODEBANC\nABC', expectedOutput: '4' },
+      { input: 'a\na', expectedOutput: '1' },
+      { input: 'a\naa', expectedOutput: '0' }
+    ]
+  },
+
+  // 4. Stack & Queues
+  {
+    title: 'Valid Parentheses Matching',
+    slug: 'valid-parentheses-matching',
+    difficulty: 'easy',
+    topics: ['Stack', 'String'],
+    companies: ['Amazon', 'Google', 'Meta', 'Bloomberg', 'Microsoft'],
+    sourceLink: 'https://leetcode.com/problems/valid-parentheses/',
+    description: 'Given a string s containing just the characters (, ), {, }, [ and ], determine if the input string is valid.',
+    testCases: [
+      { input: '()[]{}', expectedOutput: 'true' },
+      { input: '(]', expectedOutput: 'false' },
+      { input: '{[]}', expectedOutput: 'true' }
+    ]
+  },
+  {
+    title: 'Daily Temperatures Days to Warmer',
+    slug: 'daily-temperatures-days-to-warmer',
+    difficulty: 'medium',
+    topics: ['Array', 'Stack', 'Monotonic Stack'],
+    companies: ['Amazon', 'Meta', 'Google', 'Apple', 'Bloomberg'],
+    sourceLink: 'https://leetcode.com/problems/daily-temperatures/',
+    description: 'Given an array of integers temperatures represents the daily temperatures, return an array answer such that answer[i] is the number of days you have to wait after the ith day to get a warmer temperature.',
+    testCases: [
+      { input: '8\n73 74 75 71 69 72 76 73', expectedOutput: '1 1 4 2 1 1 0 0' },
+      { input: '4\n30 40 50 60', expectedOutput: '1 1 1 0' }
+    ]
+  },
+  {
+    title: 'Evaluate Reverse Polish Notation Expression',
+    slug: 'evaluate-reverse-polish-notation-expression',
+    difficulty: 'medium',
+    topics: ['Array', 'Math', 'Stack'],
+    companies: ['Amazon', 'LinkedIn', 'Google', 'Microsoft'],
+    sourceLink: 'https://leetcode.com/problems/evaluate-reverse-polish-notation/',
+    description: 'Evaluate the value of an arithmetic expression in Reverse Polish Notation. Valid operators are +, -, *, and /.',
+    testCases: [
+      { input: '5\n2 1 + 3 *', expectedOutput: '9' },
+      { input: '5\n4 13 5 / +', expectedOutput: '6' }
+    ]
+  },
+  {
+    title: 'Largest Rectangle in Histogram Area',
+    slug: 'largest-rectangle-in-histogram-area',
+    difficulty: 'hard',
+    topics: ['Array', 'Stack', 'Monotonic Stack'],
+    companies: ['Amazon', 'Google', 'Meta', 'Apple', 'Uber'],
+    sourceLink: 'https://leetcode.com/problems/largest-rectangle-in-histogram/',
+    description: 'Given an array of integers heights representing the histogram bar height where the width of each bar is 1, return the area of the largest rectangle in the histogram.',
+    testCases: [
+      { input: '6\n2 1 5 6 2 3', expectedOutput: '10' },
+      { input: '2\n2 4', expectedOutput: '4' }
+    ]
+  },
+
+  // 5. Binary Search
+  {
+    title: 'Rotated Sorted Array Search',
+    slug: 'rotated-sorted-array-search',
+    difficulty: 'medium',
+    topics: ['Binary Search', 'Array'],
+    companies: ['Amazon', 'Microsoft', 'Google', 'Meta', 'LinkedIn'],
+    sourceLink: 'https://leetcode.com/problems/search-in-rotated-sorted-array/',
+    description: 'Given an integer array nums sorted in ascending order and rotated at an unknown pivot, return the index of target in nums, or -1.',
+    testCases: [
+      { input: '7 0\n4 5 6 7 0 1 2', expectedOutput: '4' },
+      { input: '7 3\n4 5 6 7 0 1 2', expectedOutput: '-1' }
+    ]
+  },
+  {
+    title: 'Find Minimum in Rotated Sorted Array',
+    slug: 'find-minimum-in-rotated-sorted-array',
+    difficulty: 'medium',
+    topics: ['Array', 'Binary Search'],
+    companies: ['Amazon', 'Microsoft', 'Google', 'Meta', 'Apple'],
+    sourceLink: 'https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/',
+    description: 'Given the sorted rotated array nums of unique elements, return the minimum element of this array in O(log n) time.',
+    testCases: [
+      { input: '5\n3 4 5 1 2', expectedOutput: '1' },
+      { input: '7\n4 5 6 7 0 1 2', expectedOutput: '0' },
+      { input: '4\n11 13 15 17', expectedOutput: '11' }
+    ]
+  },
+  {
+    title: 'Koko Eating Bananas Minimum Speed',
+    slug: 'koko-eating-bananas-minimum-speed',
+    difficulty: 'medium',
+    topics: ['Array', 'Binary Search'],
+    companies: ['Google', 'Amazon', 'Airbnb', 'DoorDash'],
+    sourceLink: 'https://leetcode.com/problems/koko-eating-bananas/',
+    description: 'Given piles of bananas and h hours to eat them all, return the minimum integer eating speed k per hour to eat all bananas within h hours.',
+    testCases: [
+      { input: '4 8\n3 6 7 11', expectedOutput: '4' },
+      { input: '5 5\n30 11 23 4 20', expectedOutput: '30' }
+    ]
+  },
+  {
+    title: 'Search a 2D Matrix Grid',
+    slug: 'search-a-2d-matrix-grid',
+    difficulty: 'medium',
+    topics: ['Array', 'Binary Search', 'Matrix'],
+    companies: ['Amazon', 'Microsoft', 'Google', 'Meta', 'Apple'],
+    sourceLink: 'https://leetcode.com/problems/search-a-2d-matrix/',
+    description: 'Write an efficient algorithm that searches for a value target in an m x n integer matrix with strictly sorted rows and cols.',
+    testCases: [
+      { input: '3 4 3\n1 3 5 7\n10 11 16 20\n23 30 34 60', expectedOutput: 'true' },
+      { input: '3 4 13\n1 3 5 7\n10 11 16 20\n23 30 34 60', expectedOutput: 'false' }
+    ]
+  },
+
+  // 6. Linked Lists
+  {
+    title: 'Reverse Sequence List',
+    slug: 'reverse-sequence-list',
+    difficulty: 'easy',
+    topics: ['Linked List', 'Two Pointers'],
+    companies: ['Amazon', 'Google', 'Meta', 'Apple', 'Microsoft'],
+    sourceLink: 'https://leetcode.com/problems/reverse-linked-list/',
+    description: 'Given a sequence of integers representing the values of a singly linked list from head to tail, reverse the list.',
+    testCases: [
+      { input: '5\n1 2 3 4 5', expectedOutput: '5 4 3 2 1' },
+      { input: '2\n1 2', expectedOutput: '2 1' }
+    ]
+  },
+  {
+    title: 'Merge Two Sorted Lists Sequence',
+    slug: 'merge-two-sorted-lists-sequence',
+    difficulty: 'easy',
+    topics: ['Linked List', 'Recursion'],
+    companies: ['Amazon', 'Microsoft', 'Google', 'Apple', 'Meta'],
+    sourceLink: 'https://leetcode.com/problems/merge-two-sorted-lists/',
+    description: 'Merge two sorted linked list sequences into one sorted list sequence.',
+    testCases: [
+      { input: '3 3\n1 2 4\n1 3 4', expectedOutput: '1 1 2 3 4 4' },
+      { input: '0 1\n\n0', expectedOutput: '0' }
+    ]
+  },
+
+  // 7. Dynamic Programming
+  {
+    title: 'Climbing Staircase Steps',
+    slug: 'climbing-staircase-steps',
+    difficulty: 'easy',
+    topics: ['Dynamic Programming', 'Math'],
+    companies: ['Amazon', 'Google', 'Apple', 'Meta'],
+    sourceLink: 'https://leetcode.com/problems/climbing-stairs/',
+    description: 'You are climbing a staircase taking n steps. You can climb 1 or 2 steps each time. In how many distinct ways can you climb to the top?',
+    testCases: [
+      { input: '2', expectedOutput: '2' },
+      { input: '3', expectedOutput: '3' },
+      { input: '4', expectedOutput: '5' }
+    ]
+  },
+  {
+    title: 'Minimum Coin Change',
+    slug: 'minimum-coin-change',
+    difficulty: 'medium',
+    topics: ['Dynamic Programming', 'Breadth-First Search'],
+    companies: ['Amazon', 'Bloomberg', 'Microsoft', 'Google', 'Meta'],
+    sourceLink: 'https://leetcode.com/problems/coin-change/',
+    description: 'Given coins of different denominations and an amount, return the fewest number of coins needed to make up that amount, or -1.',
+    testCases: [
+      { input: '3 11\n1 2 5', expectedOutput: '3' },
+      { input: '1 3\n2', expectedOutput: '-1' },
+      { input: '1 0\n1', expectedOutput: '0' }
+    ]
+  },
+  {
+    title: 'House Robber Max Stash',
+    slug: 'house-robber-max-stash',
+    difficulty: 'medium',
+    topics: ['Array', 'Dynamic Programming'],
+    companies: ['Amazon', 'Google', 'Microsoft', 'Meta', 'Apple'],
+    sourceLink: 'https://leetcode.com/problems/house-robber/',
+    description: 'Determine maximum amount of money you can rob tonight without alerting the police by robbing adjacent houses.',
+    testCases: [
+      { input: '4\n1 2 3 1', expectedOutput: '4' },
+      { input: '5\n2 7 9 3 1', expectedOutput: '12' }
+    ]
+  },
+  {
+    title: 'Longest Increasing Subsequence Length',
+    slug: 'longest-increasing-subsequence-length',
+    difficulty: 'medium',
+    topics: ['Array', 'Binary Search', 'Dynamic Programming'],
+    companies: ['Google', 'Amazon', 'Microsoft', 'Meta', 'Bloomberg'],
+    sourceLink: 'https://leetcode.com/problems/longest-increasing-subsequence/',
+    description: 'Given an integer array nums, return the length of the longest strictly increasing subsequence.',
+    testCases: [
+      { input: '8\n10 9 2 5 3 7 101 18', expectedOutput: '4' },
+      { input: '6\n0 1 0 3 2 3', expectedOutput: '4' },
+      { input: '7\n7 7 7 7 7 7 7', expectedOutput: '1' }
+    ]
+  },
+  {
+    title: 'Word Break Segmentation Check',
+    slug: 'word-break-segmentation-check',
+    difficulty: 'medium',
+    topics: ['Hash Table', 'String', 'Dynamic Programming', 'Trie'],
+    companies: ['Amazon', 'Meta', 'Bloomberg', 'Google', 'Apple'],
+    sourceLink: 'https://leetcode.com/problems/word-break/',
+    description: 'Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a space-separated sequence of dictionary words.',
+    testCases: [
+      { input: 'leetcode\n2\nleet code', expectedOutput: 'true' },
+      { input: 'applepenapple\n2\napple pen', expectedOutput: 'true' },
+      { input: 'catsandog\n5\ncats dog sand and cat', expectedOutput: 'false' }
+    ]
+  },
+  {
+    title: 'Unique Paths in Grid Matrix',
+    slug: 'unique-paths-in-grid-matrix',
+    difficulty: 'medium',
+    topics: ['Math', 'Dynamic Programming', 'Combinatorics'],
+    companies: ['Amazon', 'Google', 'Meta', 'Microsoft', 'Bloomberg'],
+    sourceLink: 'https://leetcode.com/problems/unique-paths/',
+    description: 'A robot is located at the top-left corner of an m x n grid. The robot can only move down or right. How many unique paths to bottom-right?',
+    testCases: [
+      { input: '3 7', expectedOutput: '28' },
+      { input: '3 2', expectedOutput: '3' }
+    ]
+  },
+  {
+    title: 'Longest Common Subsequence Length',
+    slug: 'longest-common-subsequence-length',
+    difficulty: 'medium',
+    topics: ['String', 'Dynamic Programming'],
+    companies: ['Amazon', 'Google', 'Meta', 'Microsoft'],
+    sourceLink: 'https://leetcode.com/problems/longest-common-subsequence/',
+    description: 'Given two strings text1 and text2, return the length of their longest common subsequence. Return 0 if there is no common subsequence.',
+    testCases: [
+      { input: 'abcde\nace', expectedOutput: '3' },
+      { input: 'abc\nabc', expectedOutput: '3' },
+      { input: 'abc\ndef', expectedOutput: '0' }
+    ]
+  },
+
+  // 8. Intervals
+  {
+    title: 'Overlapping Interval Merging',
+    slug: 'overlapping-interval-merging',
+    difficulty: 'medium',
+    topics: ['Intervals', 'Array', 'Sorting'],
+    companies: ['Amazon', 'Google', 'Meta', 'Microsoft', 'Bloomberg'],
+    sourceLink: 'https://leetcode.com/problems/merge-intervals/',
+    description: 'Given an array of intervals where intervals[i] = [start_i, end_i], merge all overlapping intervals.',
+    testCases: [
+      { input: '4\n1 3\n2 6\n8 10\n15 18', expectedOutput: '1 6\n8 10\n15 18' },
+      { input: '2\n1 4\n4 5', expectedOutput: '1 5' }
+    ]
+  },
+  {
+    title: 'Non-overlapping Intervals Minimum Removal',
+    slug: 'non-overlapping-intervals-minimum-removal',
+    difficulty: 'medium',
+    topics: ['Array', 'Dynamic Programming', 'Greedy', 'Sorting'],
+    companies: ['Meta', 'Amazon', 'Google', 'Microsoft'],
+    sourceLink: 'https://leetcode.com/problems/non-overlapping-intervals/',
+    description: 'Given an array of intervals intervals, return the minimum number of intervals you need to remove to make the rest non-overlapping.',
+    testCases: [
+      { input: '4\n1 2\n2 3\n3 4\n1 3', expectedOutput: '1' },
+      { input: '3\n1 2\n1 2\n1 2', expectedOutput: '2' },
+      { input: '2\n1 2\n2 3', expectedOutput: '0' }
+    ]
+  },
+
+  // 9. Greedy
+  {
+    title: 'Maximum Contiguous Subarray Sum',
+    slug: 'maximum-contiguous-subarray-sum',
+    difficulty: 'medium',
+    topics: ['Array', 'Dynamic Programming', 'Divide and Conquer'],
+    companies: ['Amazon', 'Google', 'Microsoft', 'Meta', 'LinkedIn'],
+    sourceLink: 'https://leetcode.com/problems/maximum-subarray/',
+    description: 'Given an integer array nums, find the subarray with the largest sum, and return its sum.',
+    testCases: [
+      { input: '9\n-2 1 -3 4 -1 2 1 -5 4', expectedOutput: '6' },
+      { input: '1\n1', expectedOutput: '1' },
+      { input: '5\n5 4 -1 7 8', expectedOutput: '23' }
+    ]
+  },
+  {
+    title: 'Jump Game Reachability',
+    slug: 'jump-game-reachability',
+    difficulty: 'medium',
+    topics: ['Array', 'Dynamic Programming', 'Greedy'],
+    companies: ['Amazon', 'Google', 'Meta', 'Apple', 'Microsoft'],
+    sourceLink: 'https://leetcode.com/problems/jump-game/',
+    description: 'You are given an integer array nums. You are initially positioned at the first index, and each element represents your maximum jump length. Return true if you can reach the last index.',
+    testCases: [
+      { input: '5\n2 3 1 1 4', expectedOutput: 'true' },
+      { input: '5\n3 2 1 0 4', expectedOutput: 'false' }
+    ]
+  },
+  {
+    title: 'Gas Station Circuit Completer',
+    slug: 'gas-station-circuit-completer',
+    difficulty: 'medium',
+    topics: ['Array', 'Greedy'],
+    companies: ['Amazon', 'Google', 'Microsoft', 'Bloomberg'],
+    sourceLink: 'https://leetcode.com/problems/gas-station/',
+    description: 'Given two integer arrays gas and cost, return the starting gas station index if you can travel around the circuit once clockwise, or -1.',
+    testCases: [
+      { input: '5\n1 2 3 4 5\n3 4 5 1 2', expectedOutput: '3' },
+      { input: '3\n2 3 4\n3 4 3', expectedOutput: '-1' }
+    ]
+  },
+
+  // 10. Graphs
+  {
+    title: 'Number of Connected Grid Islands',
+    slug: 'number-of-connected-grid-islands',
+    difficulty: 'medium',
+    topics: ['Graph', 'Breadth-First Search', 'Depth-First Search', 'Matrix'],
+    companies: ['Amazon', 'Google', 'Meta', 'Microsoft', 'Bloomberg', 'Uber'],
+    sourceLink: 'https://leetcode.com/problems/number-of-islands/',
+    description: 'Given an m x n 2D binary grid which represents a map of 1s (land) and 0s (water), return the number of islands.',
+    testCases: [
+      { input: '4 5\n1 1 1 1 0\n1 1 0 1 0\n1 1 0 0 0\n0 0 0 0 0', expectedOutput: '1' },
+      { input: '4 5\n1 1 0 0 0\n1 1 0 0 0\n0 0 1 0 0\n0 0 0 1 1', expectedOutput: '3' }
+    ]
+  },
+  {
+    title: 'Rotting Oranges Infection Time',
+    slug: 'rotting-oranges-infection-time',
+    difficulty: 'medium',
+    topics: ['Array', 'Breadth-First Search', 'Matrix'],
+    companies: ['Amazon', 'Microsoft', 'Bloomberg', 'Meta', 'Uber'],
+    sourceLink: 'https://leetcode.com/problems/rotting-oranges/',
+    description: 'You are given an m x n grid where each cell has 0 (empty), 1 (fresh orange), or 2 (rotten orange). Return the minimum number of minutes that must elapse until no cell has a fresh orange, or -1.',
+    testCases: [
+      { input: '3 3\n2 1 1\n1 1 0\n0 1 1', expectedOutput: '4' },
+      { input: '3 3\n2 1 1\n0 1 1\n1 0 1', expectedOutput: '-1' },
+      { input: '1 2\n0 2', expectedOutput: '0' }
+    ]
+  },
+  {
+    title: 'Course Schedule Dependency Cycle Detection',
+    slug: 'course-schedule-dependency-cycle-detection',
+    difficulty: 'medium',
+    topics: ['Depth-First Search', 'Breadth-First Search', 'Graph', 'Topological Sort'],
+    companies: ['Amazon', 'Google', 'Meta', 'Apple', 'Microsoft', 'Uber'],
+    sourceLink: 'https://leetcode.com/problems/course-schedule/',
+    description: 'There are numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given prerequisites. Return true if you can finish all courses, or false if there is a cycle.',
+    testCases: [
+      { input: '2 1\n1 0', expectedOutput: 'true' },
+      { input: '2 2\n1 0\n0 1', expectedOutput: 'false' }
+    ]
+  },
+
+  // 11. Bit Manipulation & Math
+  {
+    title: 'Single Unique Number Finder',
+    slug: 'single-unique-number-finder',
+    difficulty: 'easy',
+    topics: ['Bit Manipulation', 'Array'],
+    companies: ['Amazon', 'Google', 'Meta', 'Microsoft', 'Apple'],
+    sourceLink: 'https://leetcode.com/problems/single-number/',
+    description: 'Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.',
+    testCases: [
+      { input: '3\n2 2 1', expectedOutput: '1' },
+      { input: '5\n4 1 2 1 2', expectedOutput: '4' }
+    ]
+  },
+  {
+    title: 'Number of 1 Bits Hamming Weight',
+    slug: 'number-of-1-bits-hamming-weight',
+    difficulty: 'easy',
+    topics: ['Divide and Conquer', 'Bit Manipulation'],
+    companies: ['Apple', 'Microsoft', 'Amazon', 'Google'],
+    sourceLink: 'https://leetcode.com/problems/number-of-1-bits/',
+    description: 'Given a positive integer n, write a function that returns the number of set bits (1s) it has (Hamming weight).',
+    testCases: [
+      { input: '11', expectedOutput: '3' },
+      { input: '128', expectedOutput: '1' },
+      { input: '2147483645', expectedOutput: '30' }
+    ]
+  },
+  {
+    title: 'Counting Bits Array Range',
+    slug: 'counting-bits-array-range',
+    difficulty: 'easy',
+    topics: ['Dynamic Programming', 'Bit Manipulation'],
+    companies: ['Amazon', 'Google', 'Meta', 'Apple'],
+    sourceLink: 'https://leetcode.com/problems/counting-bits/',
+    description: 'Given an integer n, return an array ans of length n + 1 such that for each i (0 <= i <= n), ans[i] is the number of 1s in the binary representation of i.',
+    testCases: [
+      { input: '2', expectedOutput: '0 1 1' },
+      { input: '5', expectedOutput: '0 1 1 2 1 2' }
+    ]
+  }
+];
+
+// Add starter code templates for any that don't have them
+starterList.forEach((prob) => {
+  if (!prob.starterCode) {
+    prob.starterCode = {
+      javascript: `// Write your solution here reading from stdin
+const fs = require('fs');
+const lines = fs.readFileSync(0, 'utf8').trim().split(/\\r?\\n/);
+// Process lines and output result
+`,
+      python: `# Write your solution here reading from stdin
+import sys
+lines = sys.stdin.read().split()
+# Process lines and print result
+`,
+      cpp: `// Write your solution here
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    // Read from cin and output result
+    return 0;
+}`,
+      java: `import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        // Process input and print result
+    }
+}`
+    };
+  }
+});
+
+const outPath = path.join(__dirname, '../data/starterPlayableProblems.json');
+fs.writeFileSync(outPath, JSON.stringify(starterList, null, 2), 'utf8');
+console.log(`✅ Saved ${starterList.length} verified playable problems to ${outPath}`);

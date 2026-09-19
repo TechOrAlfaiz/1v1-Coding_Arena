@@ -1,0 +1,690 @@
+[
+  {
+    "name": "Google",
+    "slug": "google",
+    "tier": "FAANG",
+    "logo": "🔍",
+    "brandColor": "#4285F4",
+    "description": "Distributed computing, global search indexing, high throughput infrastructure, and AI engineering.",
+    "role": {
+      "title": "Software Engineer (L4/L5)",
+      "salaryRange": "₹45L - ₹95L LPA ($185k - $320k)",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Recruiter Screen", "duration": "30 mins", "description": "Resume review and track alignment" },
+      { "stageName": "Technical Screening", "duration": "45 mins", "description": "Core algorithms & data structures" },
+      { "stageName": "Onsite Algorithms (2 Rounds)", "duration": "45 mins each", "description": "Graph algorithms, DP, and optimizations" },
+      { "stageName": "Onsite System Design", "duration": "45 mins", "description": "Large-scale distributed systems" },
+      { "stageName": "Googleyness & Leadership", "duration": "45 mins", "description": "Behavioral values and team collaboration" }
+    ]
+  },
+  {
+    "name": "Microsoft",
+    "slug": "microsoft",
+    "tier": "FAANG",
+    "logo": "🪟",
+    "brandColor": "#00A4EF",
+    "description": "Azure cloud services, developer productivity tools, and massive enterprise collaboration systems.",
+    "role": {
+      "title": "Software Engineer II (L61-62)",
+      "salaryRange": "₹32L - ₹65L LPA ($160k - $260k)",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Online Assessment (OA)", "duration": "60 mins", "description": "Algorithmic problem solving" },
+      { "stageName": "Onsite Round 1: Data Structures", "duration": "45 mins", "description": "Trees, graphs, and strings" },
+      { "stageName": "Onsite Round 2: Algorithms", "duration": "45 mins", "description": "Dynamic programming & complexity" },
+      { "stageName": "Onsite Round 3: System Design", "duration": "45 mins", "description": "Cloud microservices & scalability" },
+      { "stageName": "Onsite Round 4: AA (As Appropriate)", "duration": "45 mins", "description": "Partner engineering interview" }
+    ]
+  },
+  {
+    "name": "Amazon",
+    "slug": "amazon",
+    "tier": "FAANG",
+    "logo": "📦",
+    "brandColor": "#FF9900",
+    "description": "Customer obsession, high-concurrency e-commerce order routing, and AWS cloud primitives.",
+    "role": {
+      "title": "SDE II",
+      "salaryRange": "₹38L - ₹75L LPA ($165k - $275k)",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Online Assessment (OA)", "duration": "90 mins", "description": "Debugging and coding problem sets" },
+      { "stageName": "The Loop: Coding & Algorithms", "duration": "60 mins", "description": "Data structures paired with LP deep-dive" },
+      { "stageName": "The Loop: Low-Level & System Design", "duration": "60 mins", "description": "Extensible object-oriented architecture" },
+      { "stageName": "The Loop: Bar Raiser", "duration": "60 mins", "description": "External senior evaluator testing cultural fit" }
+    ]
+  },
+  {
+    "name": "Meta",
+    "slug": "meta",
+    "tier": "FAANG",
+    "logo": "♾️",
+    "brandColor": "#0668E1",
+    "description": "Hyper-scale social networking, real-time messaging, recommendation feeds, and Metaverse infra.",
+    "role": {
+      "title": "Software Engineer (E4/E5)",
+      "salaryRange": "₹50L - ₹1.1Cr LPA ($190k - $340k)",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Technical Screening", "duration": "45 mins", "description": "Two coding problems with speed and precision" },
+      { "stageName": "Virtual Onsite: Coding (2 Rounds)", "duration": "45 mins each", "description": "Trees, BFS/DFS, and graph traversals" },
+      { "stageName": "Virtual Onsite: System Design", "duration": "45 mins", "description": "Live feed and high-throughput messaging" },
+      { "stageName": "Virtual Onsite: Behavioral", "duration": "45 mins", "description": "Moving fast and cross-functional leadership" }
+    ]
+  },
+  {
+    "name": "Apple",
+    "slug": "apple",
+    "tier": "FAANG",
+    "logo": "🍎",
+    "brandColor": "#A2AAAD",
+    "description": "Hardware-software integration, privacy-first distributed services, and world-class mobile experiences.",
+    "role": {
+      "title": "Software Development Engineer (ICT3/ICT4)",
+      "salaryRange": "₹40L - ₹85L LPA ($180k - $310k)",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Recruiter Screen", "duration": "30 mins", "description": "Domain alignment and team fit" },
+      { "stageName": "Technical Phone Screen", "duration": "45-60 mins", "description": "Algorithms and language internals" },
+      { "stageName": "Onsite Coding & Architecture", "duration": "60 mins", "description": "Concurrency and memory management" },
+      { "stageName": "Onsite Behavioral", "duration": "45 mins", "description": "Values, user empathy, and privacy" }
+    ]
+  },
+  {
+    "name": "Netflix",
+    "slug": "netflix",
+    "tier": "FAANG",
+    "logo": "🎬",
+    "brandColor": "#E50914",
+    "description": "Chaos engineering, distributed streaming, edge caching, and culture of freedom and responsibility.",
+    "role": {
+      "title": "Senior Software Engineer (L5)",
+      "salaryRange": "₹70L - ₹1.4Cr LPA ($350k - $550k)",
+      "experienceLevel": "senior"
+    },
+    "interviewStages": [
+      { "stageName": "Recruiter Alignment", "duration": "30 mins", "description": "Culture and compensation expectations" },
+      { "stageName": "Technical System Architecture", "duration": "60 mins", "description": "High-throughput streaming design" },
+      { "stageName": "Pair Programming", "duration": "60 mins", "description": "Clean, resilient production code" },
+      { "stageName": "Culture & Autonomy", "duration": "60 mins", "description": "High ownership and judgment" }
+    ]
+  },
+  {
+    "name": "Flipkart",
+    "slug": "flipkart",
+    "tier": "Tier 1 Product",
+    "logo": "🛍️",
+    "brandColor": "#2874F0",
+    "description": "Pioneering Indian e-commerce with massive Big Billion Day scale, warehouse supply chains, and flash sales.",
+    "role": {
+      "title": "SDE II",
+      "salaryRange": "₹28L - ₹55L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Machine Coding Round", "duration": "90 mins", "description": "Live extensible OOP design implementation" },
+      { "stageName": "Problem Solving & DSA", "duration": "60 mins", "description": "Trees, DP, and graph problems" },
+      { "stageName": "System Design (HLD)", "duration": "60 mins", "description": "High-concurrency inventory and checkout flows" },
+      { "stageName": "Hiring Manager Round", "duration": "45 mins", "description": "Cultural alignment and past project deep dive" }
+    ]
+  },
+  {
+    "name": "Swiggy",
+    "slug": "swiggy",
+    "tier": "Unicorn",
+    "logo": "🛵",
+    "brandColor": "#FC8019",
+    "description": "Hyperlocal quick commerce, instant routing, dynamic delivery fleet dispatch, and Instamart logistics.",
+    "role": {
+      "title": "Software Development Engineer II",
+      "salaryRange": "₹30L - ₹58L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Machine Coding (LLD)", "duration": "90 mins", "description": "Clean object-oriented design and design patterns" },
+      { "stageName": "Data Structures & Algorithms", "duration": "60 mins", "description": "Complex graph traversals, heaps, and arrays" },
+      { "stageName": "System Architecture (HLD)", "duration": "60 mins", "description": "Real-time rider tracking and surge pricing" },
+      { "stageName": "Engineering Leadership", "duration": "45 mins", "description": "Problem-solving under production incidents" }
+    ]
+  },
+  {
+    "name": "Zomato",
+    "slug": "zomato",
+    "tier": "Tier 1 Product",
+    "logo": "🍕",
+    "brandColor": "#E23744",
+    "description": "Food delivery ecosystem, Blinkit quick-commerce integration, and high-frequency real-time ordering engine.",
+    "role": {
+      "title": "Senior Software Engineer",
+      "salaryRange": "₹32L - ₹62L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Online Coding Assessment", "duration": "60 mins", "description": "Data structures and algorithmic problem solving" },
+      { "stageName": "Technical Problem Solving", "duration": "60 mins", "description": "Optimization and edge-case handling" },
+      { "stageName": "System Design Round", "duration": "60 mins", "description": "Geospatial indexing and dispatch engine" },
+      { "stageName": "Culture & Founder Fit", "duration": "45 mins", "description": "First principles thinking and product obsession" }
+    ]
+  },
+  {
+    "name": "PhonePe",
+    "slug": "phonepe",
+    "tier": "Unicorn",
+    "logo": "🟣",
+    "brandColor": "#5F259F",
+    "description": "India's leading UPI payments platform handling billions of secure financial transactions monthly.",
+    "role": {
+      "title": "Software Engineer (Backend)",
+      "salaryRange": "₹32L - ₹65L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Coding & Problem Solving", "duration": "60 mins", "description": "Algorithmic purity and time-space trade-offs" },
+      { "stageName": "Low Level Design (LLD)", "duration": "90 mins", "description": "Concurrent ledger or rate limiter machine coding" },
+      { "stageName": "High Level Design (HLD)", "duration": "60 mins", "description": "Financial transaction idempotency & consistency" },
+      { "stageName": "Techno-Behavioral Round", "duration": "45 mins", "description": "System resilience under failure scenarios" }
+    ]
+  },
+  {
+    "name": "Razorpay",
+    "slug": "razorpay",
+    "tier": "Unicorn",
+    "logo": "⚡",
+    "brandColor": "#0C2340",
+    "description": "Payment gateway and financial infrastructure powering millions of online businesses and neobanking.",
+    "role": {
+      "title": "Software Development Engineer II",
+      "salaryRange": "₹28L - ₹54L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Online Assessment", "duration": "60 mins", "description": "Algorithmic challenges" },
+      { "stageName": "Machine Coding / LLD", "duration": "90 mins", "description": "Clean code, SOLID principles, and working implementation" },
+      { "stageName": "High Level System Design", "duration": "60 mins", "description": "Payment webhook delivery and retry queues" },
+      { "stageName": "Bar Raiser / Culture", "duration": "45 mins", "description": "Customer empathy and engineering craftsmanship" }
+    ]
+  },
+  {
+    "name": "Meesho",
+    "slug": "meesho",
+    "tier": "Unicorn",
+    "logo": "🏷️",
+    "brandColor": "#F43397",
+    "description": "Social e-commerce and zero-commission retail platform serving millions of Tier-2 and Tier-3 Indian consumers.",
+    "role": {
+      "title": "SDE II",
+      "salaryRange": "₹30L - ₹56L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Technical Screening", "duration": "60 mins", "description": "Data structures and algorithmic rigor" },
+      { "stageName": "Machine Coding (LLD)", "duration": "90 mins", "description": "Modular code design with unit testability" },
+      { "stageName": "Distributed System Design", "duration": "60 mins", "description": "Order processing and feed recommendation" },
+      { "stageName": "Hiring Manager Fit", "duration": "45 mins", "description": "Speed of iteration and problem ownership" }
+    ]
+  },
+  {
+    "name": "CRED",
+    "slug": "cred",
+    "tier": "Unicorn",
+    "logo": "💎",
+    "brandColor": "#000000",
+    "description": "Premium rewards, fintech credit card payments, and cutting-edge mobile architecture with high microservice density.",
+    "role": {
+      "title": "Backend Developer",
+      "salaryRange": "₹35L - ₹70L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Problem Solving & Coding", "duration": "60 mins", "description": "Complex data structures and optimization" },
+      { "stageName": "Machine Coding (LLD)", "duration": "90 mins", "description": "Extensible game/reward engine design" },
+      { "stageName": "System Architecture (HLD)", "duration": "60 mins", "description": "Event-driven architecture and asynchronous workflows" },
+      { "stageName": "Leadership & Culture", "duration": "45 mins", "description": "High agency, design taste, and craftsmanship" }
+    ]
+  },
+  {
+    "name": "Zepto",
+    "slug": "zepto",
+    "tier": "Unicorn",
+    "logo": "⚡",
+    "brandColor": "#800080",
+    "description": "10-minute grocery quick delivery, dark store network optimization, and high-velocity supply chain software.",
+    "role": {
+      "title": "SDE II (Backend / Infra)",
+      "salaryRange": "₹28L - ₹55L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Machine Coding Round", "duration": "90 mins", "description": "Inventory management or cart system implementation" },
+      { "stageName": "Data Structures & Algorithms", "duration": "60 mins", "description": "Arrays, trees, DP, and graphs" },
+      { "stageName": "System Design (HLD)", "duration": "60 mins", "description": "Micro-warehouse inventory sync and latency reduction" },
+      { "stageName": "Founder/VP Round", "duration": "45 mins", "description": "Speed, hustle, and technical depth" }
+    ]
+  },
+  {
+    "name": "Paytm",
+    "slug": "paytm",
+    "tier": "Tier 1 Product",
+    "logo": "📱",
+    "brandColor": "#002E6E",
+    "description": "Massive Indian digital payments, soundbox IoT telemetry, QR ecosystem, and consumer financial services.",
+    "role": {
+      "title": "Senior Software Engineer",
+      "salaryRange": "₹24L - ₹48L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Online Coding Assessment", "duration": "60 mins", "description": "Algorithms and core logic" },
+      { "stageName": "Technical Interview 1", "duration": "60 mins", "description": "Data structures, multithreading, and memory" },
+      { "stageName": "Technical Interview 2 (System Design)", "duration": "60 mins", "description": "High-throughput payment gateway architecture" },
+      { "stageName": "Managerial Round", "duration": "45 mins", "description": "Scalability mindset and cross-team delivery" }
+    ]
+  },
+  {
+    "name": "Groww",
+    "slug": "groww",
+    "tier": "Unicorn",
+    "logo": "📈",
+    "brandColor": "#00D09C",
+    "description": "Direct mutual funds, stock trading, and wealth management platform with simple, reliable user experiences.",
+    "role": {
+      "title": "Software Engineer II",
+      "salaryRange": "₹26L - ₹50L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "DSA & Problem Solving", "duration": "60 mins", "description": "Core algorithms and data structures" },
+      { "stageName": "Machine Coding / LLD", "duration": "90 mins", "description": "Stock orderbook or portfolio calculator" },
+      { "stageName": "High Level Design", "duration": "60 mins", "description": "Exchange integration and high consistency" },
+      { "stageName": "Cultural Round", "duration": "45 mins", "description": "Simplicity and user first philosophy" }
+    ]
+  },
+  {
+    "name": "Blinkit",
+    "slug": "blinkit",
+    "tier": "Unicorn",
+    "logo": "🟡",
+    "brandColor": "#F8CB46",
+    "description": "Instant delivery network powering quick commerce across Indian metropolitan and tier-1 clusters.",
+    "role": {
+      "title": "SDE II",
+      "salaryRange": "₹28L - ₹52L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Machine Coding Round", "duration": "90 mins", "description": "Working design pattern implementation" },
+      { "stageName": "DSA & Algorithms", "duration": "60 mins", "description": "Dynamic programming and graph traversals" },
+      { "stageName": "System Design", "duration": "60 mins", "description": "Dark store order assignment and stock sync" },
+      { "stageName": "Engineering Manager Fit", "duration": "45 mins", "description": "Pragmatic engineering and operational resilience" }
+    ]
+  },
+  {
+    "name": "Uber",
+    "slug": "uber",
+    "tier": "Tier 1 Product",
+    "logo": "🚗",
+    "brandColor": "#000000",
+    "description": "Real-time geospatial dispatching, high-throughput dynamic pricing, and global logistics matching.",
+    "role": {
+      "title": "Software Engineer II (L4/L5)",
+      "salaryRange": "₹42L - ₹85L LPA ($180k - $310k)",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Technical Phone Screen", "duration": "60 mins", "description": "Data structures and algorithm coding" },
+      { "stageName": "Onsite Coding (2 Rounds)", "duration": "60 mins each", "description": "Graph algorithms and data manipulation" },
+      { "stageName": "Onsite System Design", "duration": "60 mins", "description": "Geospatial indexing and real-time dispatch" },
+      { "stageName": "Behavioral & Cultural Values", "duration": "45 mins", "description": "Ownership and cross-functional navigation" }
+    ]
+  },
+  {
+    "name": "Airbnb",
+    "slug": "airbnb",
+    "tier": "Tier 1 Product",
+    "logo": "🏠",
+    "brandColor": "#FF5A5F",
+    "description": "Belong anywhere culture with high bar for distributed search, availability, and payments.",
+    "role": {
+      "title": "Software Engineer (L4/L5)",
+      "salaryRange": "₹45L - ₹90L LPA ($200k - $360k)",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Recruiter Phone Screen", "duration": "30 mins", "description": "Role alignment and expectations" },
+      { "stageName": "Coding Challenge / Phone Screen", "duration": "60 mins", "description": "Practical algorithmic problem solving" },
+      { "stageName": "Virtual Onsite: Architecture", "duration": "60 mins", "description": "Listing reservation and distributed caching" },
+      { "stageName": "Virtual Onsite: Core Values", "duration": "45 mins", "description": "Airbnb host/guest empathy and cultural fit" }
+    ]
+  },
+  {
+    "name": "Atlassian",
+    "slug": "atlassian",
+    "tier": "Tier 1 Product",
+    "logo": "🔷",
+    "brandColor": "#0052CC",
+    "description": "Team collaboration powerhouses Jira, Confluence, and Trello with a massive engineering presence in Bengaluru.",
+    "role": {
+      "title": "Software Development Engineer II (P30/P40)",
+      "salaryRange": "₹35L - ₹72L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "CoderPad Technical Screen", "duration": "60 mins", "description": "Live clean code and data structures" },
+      { "stageName": "Onsite Coding & Algorithms", "duration": "60 mins", "description": "Complex logic and defensive coding" },
+      { "stageName": "System Design Round", "duration": "60 mins", "description": "Multi-tenant cloud collaborative systems" },
+      { "stageName": "Values & 'Don't #@!% the Customer'", "duration": "45 mins", "description": "Authenticity, empathy, and team play" }
+    ]
+  },
+  {
+    "name": "Adobe",
+    "slug": "adobe",
+    "tier": "Tier 1 Product",
+    "logo": "🅰️",
+    "brandColor": "#FF0000",
+    "description": "Creative Cloud, digital document infrastructure, high-performance rendering engines, and large Noida/Bengaluru labs.",
+    "role": {
+      "title": "Computer Scientist / SDE II",
+      "salaryRange": "₹28L - ₹55L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Online Coding Assessment", "duration": "90 mins", "description": "Data structures and mathematical problem solving" },
+      { "stageName": "Technical Round 1: DSA", "duration": "60 mins", "description": "Trees, graphs, and DP problems" },
+      { "stageName": "Technical Round 2: Architecture", "duration": "60 mins", "description": "Object-oriented and distributed design" },
+      { "stageName": "Director / HR Round", "duration": "45 mins", "description": "Innovation mindset and research orientation" }
+    ]
+  },
+  {
+    "name": "Salesforce",
+    "slug": "salesforce",
+    "tier": "Tier 1 Product",
+    "logo": "☁️",
+    "brandColor": "#00A1E0",
+    "description": "World's #1 CRM platform, multi-tenant cloud architecture, enterprise messaging, and Hyderabad mega-hub.",
+    "role": {
+      "title": "MTS (Member of Technical Staff)",
+      "salaryRange": "₹30L - ₹60L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "HackerRank Coding Test", "duration": "90 mins", "description": "Core algorithms and SQL" },
+      { "stageName": "Technical Screen", "duration": "60 mins", "description": "Data structures and system fundamentals" },
+      { "stageName": "Onsite Algorithms & Coding", "duration": "60 mins", "description": "Recursion, graph traversal, and sorting" },
+      { "stageName": "Onsite System Design", "duration": "60 mins", "description": "Multi-tenant scalability and database sharding" },
+      { "stageName": "Engineering Leadership", "duration": "45 mins", "description": "Equality, trust, and stakeholder collaboration" }
+    ]
+  },
+  {
+    "name": "Oracle",
+    "slug": "oracle",
+    "tier": "Tier 1 Product",
+    "logo": "🔴",
+    "brandColor": "#F80000",
+    "description": "Oracle Cloud Infrastructure (OCI), high-performance databases, virtualization, and enterprise software.",
+    "role": {
+      "title": "Software Developer (IC2/IC3)",
+      "salaryRange": "₹25L - ₹52L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Online Assessment", "duration": "60 mins", "description": "Core algorithms, trees, and CS basics" },
+      { "stageName": "Technical Round 1: DSA", "duration": "60 mins", "description": "Linked lists, dynamic programming, and binary search" },
+      { "stageName": "Technical Round 2: System Architecture", "duration": "60 mins", "description": "Database internals and cloud networking" },
+      { "stageName": "Hiring Manager Round", "duration": "45 mins", "description": "Role expectations and technical breadth" }
+    ]
+  },
+  {
+    "name": "Intuit",
+    "slug": "intuit",
+    "tier": "Tier 1 Product",
+    "logo": "💼",
+    "brandColor": "#0077C5",
+    "description": "TurboTax, QuickBooks, and Credit Karma fintech ecosystem with strong focus on AI-driven financial prosperity.",
+    "role": {
+      "title": "Software Engineer II",
+      "salaryRange": "₹30L - ₹60L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Technical Screening", "duration": "60 mins", "description": "DSA problem solving and code cleanliness" },
+      { "stageName": "Craft Demonstration (Presentation)", "duration": "60 mins", "description": "Deep dive presentation on candidate's best work" },
+      { "stageName": "Onsite Coding & Design", "duration": "60 mins", "description": "Data structures and architectural trade-offs" },
+      { "stageName": "Values & Customer Obsession", "duration": "45 mins", "description": "Design thinking and integrity principles" }
+    ]
+  },
+  {
+    "name": "PayPal",
+    "slug": "paypal",
+    "tier": "Tier 1 Product",
+    "logo": "🅿️",
+    "brandColor": "#003087",
+    "description": "Global digital payments processing, real-time risk assessment, anti-fraud ML, and Chennai/Bengaluru tech centers.",
+    "role": {
+      "title": "Software Engineer 2",
+      "salaryRange": "₹26L - ₹52L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Online Coding Test", "duration": "90 mins", "description": "Algorithmic problem solving" },
+      { "stageName": "Technical Round 1: Algorithms", "duration": "60 mins", "description": "Arrays, trees, DP, and concurrency" },
+      { "stageName": "Technical Round 2: System Design", "duration": "60 mins", "description": "Low-latency distributed payment systems" },
+      { "stageName": "Director Interview", "duration": "45 mins", "description": "Leadership, customer protection, and scale" }
+    ]
+  },
+  {
+    "name": "ServiceNow",
+    "slug": "servicenow",
+    "tier": "Tier 1 Product",
+    "logo": "⚙️",
+    "brandColor": "#81B5A1",
+    "description": "Enterprise cloud workflows, digital transformation engines, and Hyderabad R&D center.",
+    "role": {
+      "title": "Staff / Senior Software Engineer",
+      "salaryRange": "₹32L - ₹64L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "HackerRank Coding Assessment", "duration": "90 mins", "description": "Algorithms and data manipulation" },
+      { "stageName": "Technical Round 1: DSA", "duration": "60 mins", "description": "Graphs, DP, and hash tables" },
+      { "stageName": "Technical Round 2: System Design", "duration": "60 mins", "description": "Enterprise multi-instance workflow architecture" },
+      { "stageName": "Managerial Round", "duration": "45 mins", "description": "Customer mindset and agile problem solving" }
+    ]
+  },
+  {
+    "name": "Cisco",
+    "slug": "cisco",
+    "tier": "Tier 1 Product",
+    "logo": "🌐",
+    "brandColor": "#049FD9",
+    "description": "Networking hardware, cybersecurity, cloud routing, SD-WAN, and telecommunications infrastructure.",
+    "role": {
+      "title": "Software Engineer (Grade 8/9)",
+      "salaryRange": "₹22L - ₹45L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Online Test", "duration": "60 mins", "description": "Coding, OS primitives, and networking basics" },
+      { "stageName": "Technical Round 1: DSA", "duration": "60 mins", "description": "Linked lists, bit manipulation, and arrays" },
+      { "stageName": "Technical Round 2: Low Level Design", "duration": "60 mins", "description": "Concurrency, packet processing, and OOP" },
+      { "stageName": "HR / Managerial Round", "duration": "45 mins", "description": "Team dynamics and organizational fit" }
+    ]
+  },
+  {
+    "name": "Qualcomm",
+    "slug": "qualcomm",
+    "tier": "Tier 1 Product",
+    "logo": "📡",
+    "brandColor": "#0056B3",
+    "description": "Semiconductors, Snapdragon mobile chips, 5G modems, and embedded software systems in Bengaluru and Hyderabad.",
+    "role": {
+      "title": "Software Engineer (Intermediate/Senior)",
+      "salaryRange": "₹22L - ₹46L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Technical Online Test", "duration": "60 mins", "description": "C/C++, OS fundamentals, and algorithms" },
+      { "stageName": "Technical Round 1: C/C++ & DSA", "duration": "60 mins", "description": "Pointers, memory layout, and trees" },
+      { "stageName": "Technical Round 2: OS & Concurrency", "duration": "60 mins", "description": "Multithreading, synchronization, and driver models" },
+      { "stageName": "Managerial Round", "duration": "45 mins", "description": "Project deep dive and communication" }
+    ]
+  },
+  {
+    "name": "Nvidia",
+    "slug": "nvidia",
+    "tier": "Tier 1 Product",
+    "logo": "🟢",
+    "brandColor": "#76B900",
+    "description": "GPU acceleration, CUDA computing, AI supercomputing clusters, and autonomous driving simulation.",
+    "role": {
+      "title": "Software Engineer (Compute/AI)",
+      "salaryRange": "₹35L - ₹75L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Online Screening", "duration": "60 mins", "description": "Coding and systems programming" },
+      { "stageName": "Technical Round 1: Algorithms & DSA", "duration": "60 mins", "description": "Graph algorithms, arrays, and memory efficiency" },
+      { "stageName": "Technical Round 2: Systems Architecture", "duration": "60 mins", "description": "Parallel computing, caching, and throughput" },
+      { "stageName": "Hiring Manager", "duration": "45 mins", "description": "Passion for AI acceleration and hardware-software bounds" }
+    ]
+  },
+  {
+    "name": "Goldman Sachs",
+    "slug": "goldman-sachs",
+    "tier": "Tier 1 Product",
+    "logo": "🏛️",
+    "brandColor": "#7399C6",
+    "description": "Global quantitative trading platforms, institutional risk engines, and enterprise security in Bengaluru.",
+    "role": {
+      "title": "Analyst / Associate Software Engineer",
+      "salaryRange": "₹26L - ₹55L LPA ($150k - $240k)",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "HackerRank Assessment", "duration": "90 mins", "description": "Coding and quantitative aptitude" },
+      { "stageName": "Technical Screening", "duration": "45 mins", "description": "Algorithms and core CS fundamentals" },
+      { "stageName": "Superday Round 1: Coding", "duration": "45 mins", "description": "Data structures and clean implementation" },
+      { "stageName": "Superday Round 2: System Architecture", "duration": "45 mins", "description": "Fault tolerance and transaction processing" },
+      { "stageName": "Superday Round 3: Cultural Fit", "duration": "45 mins", "description": "Collaboration and financial integrity" }
+    ]
+  },
+  {
+    "name": "Morgan Stanley",
+    "slug": "morgan-stanley",
+    "tier": "Tier 1 Product",
+    "logo": "💼",
+    "brandColor": "#002B49",
+    "description": "Investment banking algorithms, low-latency market gateways, and asset management platforms in Mumbai and Bengaluru.",
+    "role": {
+      "title": "Senior Associate / Manager",
+      "salaryRange": "₹24L - ₹50L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Online Coding Test", "duration": "60 mins", "description": "Algorithms and SQL" },
+      { "stageName": "Technical Round 1: DSA", "duration": "60 mins", "description": "Trees, sorting, and dynamic programming" },
+      { "stageName": "Technical Round 2: System Design", "duration": "60 mins", "description": "Transactional integrity and distributed caching" },
+      { "stageName": "Senior Leadership Round", "duration": "45 mins", "description": "Risk management and cross-border teamwork" }
+    ]
+  },
+  {
+    "name": "J.P. Morgan",
+    "slug": "j-p-morgan",
+    "tier": "Tier 1 Product",
+    "logo": "🏦",
+    "brandColor": "#0A2540",
+    "description": "Global payment rails, trading execution systems, and cloud-native financial software across India campuses.",
+    "role": {
+      "title": "Software Engineer (Associate)",
+      "salaryRange": "₹22L - ₹46L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "HackerRank Coding", "duration": "60 mins", "description": "Problem solving and complexity analysis" },
+      { "stageName": "Technical Screening", "duration": "60 mins", "description": "Data structures and object-oriented design" },
+      { "stageName": "Technical Interview 2", "duration": "60 mins", "description": "System architecture, databases, and microservices" },
+      { "stageName": "Behavioral Round", "duration": "45 mins", "description": "Integrity, risk, and agile delivery" }
+    ]
+  },
+  {
+    "name": "DE Shaw",
+    "slug": "de-shaw",
+    "tier": "Tier 1 Product",
+    "logo": "📊",
+    "brandColor": "#001E44",
+    "description": "Quantitative investment management and high-frequency trading technology with high engineering bar in Hyderabad.",
+    "role": {
+      "title": "Member of Technical Staff",
+      "salaryRange": "₹38L - ₹80L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Online Coding Round", "duration": "90 mins", "description": "Hard algorithmic challenges and mathematical puzzle" },
+      { "stageName": "Technical Round 1: DSA", "duration": "60 mins", "description": "Extremely rigorous algorithmic depth" },
+      { "stageName": "Technical Round 2: Systems & Design", "duration": "60 mins", "description": "Memory models, caching, and low latency" },
+      { "stageName": "Director Round", "duration": "60 mins", "description": "Intellectual horsepower and curiosity" }
+    ]
+  },
+  {
+    "name": "Media.net",
+    "slug": "media-net",
+    "tier": "Tier 1 Product",
+    "logo": "🎯",
+    "brandColor": "#FF5722",
+    "description": "Contextual advertising, ultra-low latency real-time bidding (RTB) auctions, and high-throughput ad-tech engines.",
+    "role": {
+      "title": "Senior Software Engineer",
+      "salaryRange": "₹30L - ₹65L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Online Assessment", "duration": "90 mins", "description": "Complex algorithms and optimization" },
+      { "stageName": "DSA Deep Dive (2 Rounds)", "duration": "60 mins each", "description": "Graphs, dynamic programming, and binary search" },
+      { "stageName": "System Architecture", "duration": "60 mins", "description": "Sub-millisecond latency auction systems" },
+      { "stageName": "Executive Round", "duration": "45 mins", "description": "Analytical problem solving under pressure" }
+    ]
+  },
+  {
+    "name": "Juspay",
+    "slug": "juspay",
+    "tier": "Tier 1 Product",
+    "logo": "🚀",
+    "brandColor": "#2950F0",
+    "description": "Deep functional programming (Haskell/PureScript), UPI transaction switch infra, and high-reliability payment UX.",
+    "role": {
+      "title": "Product Engineer",
+      "salaryRange": "₹22L - ₹48L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Hackathon / Coding Challenge", "duration": "3-4 hours", "description": "Functional design and algorithmic implementation" },
+      { "stageName": "Technical Deep Dive", "duration": "60 mins", "description": "Concurrence, idempotency, and immutability" },
+      { "stageName": "System Architecture", "duration": "60 mins", "description": "Reliable state machines and distributed payments" },
+      { "stageName": "Founder/VP Interaction", "duration": "45 mins", "description": "First-principles engineering and learning velocity" }
+    ]
+  },
+  {
+    "name": "MakeMyTrip",
+    "slug": "makemytrip",
+    "tier": "Tier 1 Product",
+    "logo": "✈️",
+    "brandColor": "#E41D34",
+    "description": "India's premier online travel and ticketing platform managing heavy holiday traffic spikes and booking pipelines.",
+    "role": {
+      "title": "Senior Software Engineer",
+      "salaryRange": "₹24L - ₹48L LPA",
+      "experienceLevel": "mid"
+    },
+    "interviewStages": [
+      { "stageName": "Online Assessment", "duration": "60 mins", "description": "Data structures and programming" },
+      { "stageName": "Technical Round 1: DSA", "duration": "60 mins", "description": "Strings, trees, DP, and graphs" },
+      { "stageName": "Technical Round 2: System Design", "duration": "60 mins", "description": "Flight booking engine and cache invalidation" },
+      { "stageName": "Director Fit", "duration": "45 mins", "description": "Business impact and architectural evolution" }
+    ]
+  }
+]

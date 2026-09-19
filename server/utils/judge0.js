@@ -1,105 +1,146 @@
-/**
- * Judge0 API Integration
- * Handles code execution via Judge0 API
- * 
- * Get your API key at: https://rapidapi.com/judge0-official/api/judge0-ce
- */
+const { exec } = require('child_process');
+const fs = require('fs');
+const path = require('path');
+const { normalizeOutput } = require('./helpers');
 
-const axios = require('axios');
-const { getLanguageId, normalizeOutput } = require('./helpers');
+const TEMP_DIR = path.join(__dirname, '../temp');
 
-const JUDGE0_URL = process.env.JUDGE0_API_URL || 'https://judge0-ce.p.rapidapi.com';
-const API_KEY = process.env.JUDGE0_API_KEY;
-const API_HOST = process.env.JUDGE0_API_HOST || 'judge0-ce.p.rapidapi.com';
+// Temp directory bana agar nahi hai
+if (!fs.existsSync(TEMP_DIR)) {
+  fs.mkdirSync(TEMP_DIR, { recursive: true });
+}
 
-/**
- * Submit code to Judge0 and get results
- * 
- * @param {string} code - Source code to execute
- * @param {string} language - Language (javascript, python, cpp, java)
- * @param {string} stdin - Input for the program
- * @param {number} timeLimit - Time limit in seconds
- * @returns {object} { stdout, stderr, status, time, memory }
- */
-const executeCode = async (code, language, stdin = '', timeLimit = 5) => {
-  const languageId = getLanguageId(language);
+const executeCode = async (code, language, stdin = '') => {
+  return new Promise((resolve, reject) => {
+    const id = Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 
-  const headers = {
-    'Content-Type': 'application/json',
-    'X-RapidAPI-Key': API_KEY,
-    'X-RapidAPI-Host': API_HOST,
-  };
+    let srcFile, compileCmd, runCmd;
 
-  try {
-    // Step 1: Submit the code (create a submission)
-    const submitResponse = await axios.post(
-      `${JUDGE0_URL}/submissions?base64_encoded=false&wait=false`,
-      {
-        source_code: code,
-        language_id: languageId,
-        stdin: stdin,
-        cpu_time_limit: timeLimit,
-        memory_limit: 128000, // 128MB
-      },
-      { headers, timeout: 10000 }
-    );
+    const lang = language?.toLowerCase();
 
-    const token = submitResponse.data.token;
+    if (lang === 'cpp' || lang === 'c++') {
+      srcFile = path.join(TEMP_DIR, `${id}.cpp`);
+      const outFile = path.join(TEMP_DIR, `${id}.exe`);
+      const inputFile = path.join(TEMP_DIR, `${id}.txt`);
+      fs.writeFileSync(srcFile, code);
+      fs.writeFileSync(inputFile, stdin);
 
-    if (!token) {
-      throw new Error('No submission token received from Judge0');
+      compileCmd = `g++ "${srcFile}" -o "${outFile}"`;
+      runCmd = `"${outFile}" < "${inputFile}"`;
+
+      exec(compileCmd, { timeout: 10000 }, (compileErr, _, compileStderr) => {
+        if (compileErr) {
+          cleanup([srcFile, outFile, inputFile]);
+          return resolve({
+            stdout: '',
+            stderr: compileStderr || compileErr.message,
+            status: { description: 'Compilation Error' },
+            statusId: 6,
+            isAccepted: false,
+          });
+        }
+
+        exec(runCmd, { timeout: 5000 }, (runErr, stdout, stderr) => {
+          cleanup([srcFile, outFile, inputFile]);
+          if (runErr && runErr.killed) {
+            return resolve({
+              stdout: '',
+              stderr: 'Time Limit Exceeded',
+              status: { description: 'Time Limit Exceeded' },
+              statusId: 5,
+              isAccepted: false,
+            });
+          }
+          resolve({
+            stdout: stdout || '',
+            stderr: stderr || '',
+            status: { description: runErr ? 'Runtime Error' : 'Accepted' },
+            statusId: runErr ? 11 : 3,
+            isAccepted: !runErr,
+          });
+        });
+      });
+
+    } else if (lang === 'python') {
+      srcFile = path.join(TEMP_DIR, `${id}.py`);
+      const inputFile = path.join(TEMP_DIR, `${id}.txt`);
+      fs.writeFileSync(srcFile, code);
+      fs.writeFileSync(inputFile, stdin);
+      runCmd = `python "${srcFile}" < "${inputFile}"`;
+
+      exec(runCmd, { timeout: 5000 }, (runErr, stdout, stderr) => {
+        cleanup([srcFile, inputFile]);
+        resolve({
+          stdout: stdout || '',
+          stderr: stderr || '',
+          status: { description: runErr ? 'Runtime Error' : 'Accepted' },
+          statusId: runErr ? 11 : 3,
+          isAccepted: !runErr,
+        });
+      });
+
+    } else if (lang === 'java') {
+      srcFile = path.join(TEMP_DIR, `Main_${id}.java`);
+      const inputFile = path.join(TEMP_DIR, `${id}.txt`);
+      fs.writeFileSync(srcFile, code);
+      fs.writeFileSync(inputFile, stdin);
+      compileCmd = `javac "${srcFile}"`;
+      runCmd = `java -cp "${TEMP_DIR}" Main_${id} < "${inputFile}"`;
+
+      exec(compileCmd, { timeout: 10000 }, (compileErr, _, compileStderr) => {
+        if (compileErr) {
+          cleanup([srcFile, inputFile]);
+          return resolve({
+            stdout: '',
+            stderr: compileStderr || compileErr.message,
+            status: { description: 'Compilation Error' },
+            statusId: 6,
+            isAccepted: false,
+          });
+        }
+        exec(runCmd, { timeout: 5000 }, (runErr, stdout, stderr) => {
+          cleanup([srcFile, inputFile]);
+          resolve({
+            stdout: stdout || '',
+            stderr: stderr || '',
+            status: { description: runErr ? 'Runtime Error' : 'Accepted' },
+            statusId: runErr ? 11 : 3,
+            isAccepted: !runErr,
+          });
+        });
+      });
+
+    } else if (lang === 'javascript') {
+      srcFile = path.join(TEMP_DIR, `${id}.js`);
+      const inputFile = path.join(TEMP_DIR, `${id}.txt`);
+      fs.writeFileSync(srcFile, code);
+      fs.writeFileSync(inputFile, stdin);
+      runCmd = `node "${srcFile}" < "${inputFile}"`;
+
+      exec(runCmd, { timeout: 5000 }, (runErr, stdout, stderr) => {
+        cleanup([srcFile, inputFile]);
+        resolve({
+          stdout: stdout || '',
+          stderr: stderr || '',
+          status: { description: runErr ? 'Runtime Error' : 'Accepted' },
+          statusId: runErr ? 11 : 3,
+          isAccepted: !runErr,
+        });
+      });
+
+    } else {
+      reject(new Error(`Unsupported language: ${language}`));
     }
-
-    // Step 2: Poll for results (Judge0 processes asynchronously)
-    let result = null;
-    let attempts = 0;
-    const maxAttempts = 15;
-
-    while (attempts < maxAttempts) {
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait 1 second
-
-      const resultResponse = await axios.get(
-        `${JUDGE0_URL}/submissions/${token}?base64_encoded=false`,
-        { headers, timeout: 10000 }
-      );
-
-      result = resultResponse.data;
-
-      // Status 1 = In Queue, Status 2 = Processing
-      if (result.status.id > 2) break;
-
-      attempts++;
-    }
-
-    if (!result) {
-      throw new Error('Code execution timed out');
-    }
-
-    return {
-      stdout: result.stdout || '',
-      stderr: result.stderr || result.compile_output || '',
-      status: result.status,
-      statusId: result.status.id,
-      time: result.time,
-      memory: result.memory,
-      // Status IDs: 3=Accepted, 4=Wrong Answer, 5=TLE, 6=CE, 11=Runtime Error
-      isAccepted: result.status.id === 3,
-    };
-  } catch (error) {
-    if (error.response?.status === 401) {
-      throw new Error('Invalid Judge0 API key. Please check your .env file.');
-    }
-    if (error.code === 'ECONNREFUSED') {
-      throw new Error('Cannot connect to Judge0. Check JUDGE0_API_URL in .env');
-    }
-    throw error;
-  }
+  });
 };
 
-/**
- * Run code against multiple test cases
- * Returns pass/fail for each test case
- */
+// Temp files cleanup
+function cleanup(files) {
+  files.forEach(f => {
+    try { if (fs.existsSync(f)) fs.unlinkSync(f); } catch (_) {}
+  });
+}
+
 const runTestCases = async (code, language, testCases) => {
   const results = [];
 
@@ -117,7 +158,7 @@ const runTestCases = async (code, language, testCases) => {
         passed,
         error: result.stderr || null,
         status: result.status?.description || 'Unknown',
-        time: result.time,
+        time: null,
       });
     } catch (error) {
       results.push({
