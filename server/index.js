@@ -41,20 +41,51 @@ const errorHandler = require('./middleware/errorHandler');
 const app = express();
 const server = http.createServer(app);
 
-// ─── Socket.IO Setup ──────────────────────────────────────────────────────────
+// ─── Multi-Origin CORS & Socket.IO Setup ─────────────────────────────────────
+const rawOrigins = process.env.CLIENT_URL
+  ? process.env.CLIENT_URL.split(',').map((u) => u.trim().replace(/\/$/, ''))
+  : ['http://localhost:3000'];
+
+const isOriginAllowed = (origin) => {
+  if (!origin) return true; // Non-browser / health-check requests
+  const normalized = origin.replace(/\/$/, '');
+  return (
+    rawOrigins.includes('*') ||
+    rawOrigins.includes(normalized) ||
+    normalized.endsWith('.vercel.app') ||
+    normalized.endsWith('.onrender.com') ||
+    normalized === 'http://localhost:3000' ||
+    normalized === 'http://127.0.0.1:3000'
+  );
+};
+
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    origin: (origin, callback) => {
+      if (isOriginAllowed(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`CORS origin blocked: ${origin}`));
+      }
+    },
     methods: ['GET', 'POST'],
     credentials: true,
   },
 });
 
 // ─── Middleware ───────────────────────────────────────────────────────────────
-app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (isOriginAllowed(origin)) {
+        callback(null, true);
+      } else {
+        callback(null, false);
+      }
+    },
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
