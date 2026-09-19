@@ -25,6 +25,8 @@ server/data/sources/
 .DS_Store
 Thumbs.db
 
-# Editor
+# Editor & Cloud CLI
 .vscode/
 .idea/
+.vercel/
+

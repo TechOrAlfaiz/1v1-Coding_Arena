@@ -1,21 +1,151 @@
-# ⚡ 1v1 Coding Arena
+<div align="center">
 
-A real-time competitive coding platform where two players battle head-to-head on the same coding problem. First correct submission wins. ELO-rated.
+# ⚡ 1v1 Coding Arena & Interview Prep AI
+
+**The next-generation real-time competitive coding platform and AI-powered technical interview simulator.**
+
+[![Live Frontend](https://img.shields.io/badge/Live%20Demo-Vercel-black?style=for-the-badge&logo=vercel)](https://client-rust-kappa-90.vercel.app)
+[![Live Backend API](https://img.shields.io/badge/Backend%20API-Render-46E3B7?style=for-the-badge&logo=render)](https://coding-arena-api.onrender.com)
+[![GitHub License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/TechOrAlfaiz/1v1-Coding_Arena?style=for-the-badge&color=gold)](https://github.com/TechOrAlfaiz/1v1-Coding_Arena/stargazers)
+
+<br/>
+
+[🚀 Live Frontend App](https://client-rust-kappa-90.vercel.app) • [⚡ Production API](https://coding-arena-api.onrender.com/api/health) • [📖 Architecture](#-system-architecture) • [✨ Features](#-key-features) • [🛠️ Setup Guide](#-quick-start)
 
 ---
 
-## 🖼️ Features
+</div>
 
-- 🔐 **JWT Authentication** — Register/Login with secure token-based auth
-- 🏠 **Lobby System** — Create rooms, join by Room ID, or queue for random matchmaking
-- ⚔️ **Real-Time 1v1 Matches** — Both players see the same problem; Socket.IO keeps everything in sync
-- 🕐 **Synchronized Timer** — 15-minute countdown broadcast to both players via Socket.IO
-- 💻 **Monaco Editor** — VS Code-like editor with syntax highlighting for JS, Python, C++, Java
-- 🤖 **Judge0 Code Execution** — Real test case evaluation against hidden test cases
-- 🏆 **ELO Rating System** — Chess-style rating changes after every match
-- 🎯 **Matchmaking Queue** — Automated opponent finding
-- 📊 **Match History** — Full history with ELO changes
-- 🥇 **Leaderboard** — Global rankings with tier system
+## 🌟 Overview
+
+**1v1 Coding Arena** is a full-stack, cloud-deployed platform engineered for competitive programmers and software engineers preparing for high-stakes technical interviews at Tier-1 tech companies.
+
+It unifies **low-latency real-time multiplayer coding battles** with a comprehensive **AI Mock Interview suite** featuring 3D avatar voice interaction, interactive system architecture whiteboarding, automated code execution, and deep multidimensional feedback reports.
+
+---
+
+## 📸 Screenshots Showcase
+
+<div align="center">
+
+### ⚔️ 1v1 Arena Matchmaking & Lobby
+*Join queues, challenge friends via custom Room IDs, or compete in ranked matchmaking.*
+<br/>
+<img src="docs/screenshots/01_arena_lobby.png" alt="1v1 Arena Lobby" width="850"/>
+
+<br/><br/>
+
+### 💻 Pro Code Editor & Live Test Runner
+*Monaco-powered IDE with multi-language syntax highlighting, test cases, and instant evaluation.*
+<br/>
+<img src="docs/screenshots/02_code_editor_sandbox.png" alt="Code Editor Sandbox" width="850"/>
+
+<br/><br/>
+
+### 🎙️ AI Technical Mock Interview (Live 3D Avatar)
+*Interactive voice & video interview simulation with real-time feedback and probing questions.*
+<br/>
+<img src="docs/screenshots/03_ai_avatar_interview.png" alt="AI Avatar Interview" width="850"/>
+
+<br/><br/>
+
+### 🎨 System Architecture & Collaborative Whiteboard
+*Design scalable distributed systems with live diagramming alongside coding problems.*
+<br/>
+<img src="docs/screenshots/04_whiteboard_architecture.png" alt="Whiteboard Architecture" width="850"/>
+
+<br/><br/>
+
+### 📊 Comprehensive AI Candidate Evaluation Report
+*In-depth score breakdown across DSA mastery, communication, system design, and optimization tips.*
+<br/>
+<img src="docs/screenshots/05_ai_evaluation_report.png" alt="AI Evaluation Report" width="850"/>
+
+<br/><br/>
+
+### 🏆 1v1 Duel Victory & ELO Progression
+*Head-to-head battle outcomes with instantaneous ELO rating updates and tier progressions.*
+<br/>
+<img src="docs/screenshots/06_1v1_duel_victory.png" alt="1v1 Duel Result" width="850"/>
+
+<br/><br/>
+
+### 🥇 Global Leaderboard & Tier Rankings
+*Live competitive rankings ranging from Bronze to Grandmaster gladiator status.*
+<br/>
+<img src="docs/screenshots/07_global_leaderboard.png" alt="Global Leaderboard" width="850"/>
+
+<br/><br/>
+
+### 📈 User Dashboard & Performance Analytics
+*Track your win-loss ratios, rating history, streak achievements, and interview stats.*
+<br/>
+<img src="docs/screenshots/08_user_dashboard_analytics.png" alt="User Dashboard" width="850"/>
+
+<br/><br/>
+
+### 📱 Responsive Mobile Experience
+*Adaptive interface crafted for practicing coding questions and reviewing reports on mobile devices.*
+<br/>
+<img src="docs/screenshots/09_mobile_responsive_view.png" alt="Mobile View" width="400"/>
+
+</div>
+
+---
+
+## ✨ Key Features
+
+### ⚔️ Real-Time 1v1 Coding Arena
+- **Synchronized Matchmaking**: Match instantly with gladiators in your ELO bracket or share room codes with peers.
+- **Synced Timer & State**: 15-minute high-octane countdown synchronized via low-latency Socket.IO WebSockets.
+- **Judge0 Execution Engine**: Real-time compilation and automated testing against visible and hidden test suites.
+- **Chess-Style ELO Rating System**: Win/loss rating calculations update dynamically after every match.
+
+### 🤖 AI Technical Interview Suite
+- **Interactive 3D Avatar**: Conduct realistic mock interviews with conversational AI speech synthesis and recognition.
+- **Multi-Modal Interview Options**: Standard DSA Coding Lab, Behavioral Screening, and System Design Whiteboard.
+- **10-Factor AI Candidate Evaluation**: Generates detailed performance diagnostics, code complexity analysis ($O(N)$ Big-O verification), and customized improvement recommendations.
+
+### 📚 Curated Question Bank (3,400+ Problems)
+- **Company-Specific Collections**: Practice questions categorized by Google, Meta, Amazon, Apple, Microsoft, Uber, Netflix, and more.
+- **Filter by Topic & Difficulty**: Binary Search, Dynamic Programming, Graphs, Trees, Heaps, and System Architecture.
+- **Daily Challenge Engine**: Automated daily challenge with UTC countdown timer and streak tracker.
+
+### 🛡️ Enterprise Security & Robustness
+- **JWT Stateless Authentication**: Secure token verification with encrypted password hashing (bcrypt).
+- **Graceful Error Handling & Fallbacks**: Resilience against API throttles with internal mock test evaluation fallbacks.
+- **Strict CORS & Routing**: Wildcard regex matching for preview and production domains with SPA deep-link routing.
+
+---
+
+## 🏗️ System Architecture
+
+```mermaid
+flowchart TD
+    subgraph Client["Frontend Client (Vercel)"]
+        UI["React 18 SPA (Tailwind CSS)"]
+        Monaco["Monaco Code Editor"]
+        Avatar["3D Avatar & Web Speech API"]
+        SockClient["Socket.IO Client"]
+    end
+
+    subgraph Cloud["Production Cloud Infrastructure"]
+        VercelCDN["Vercel Edge Network"]
+        Render["Render Web Service (Node.js/Express)"]
+        Atlas[("MongoDB Atlas Cloud DB")]
+        Judge0["Judge0 Code Execution API"]
+        AI["Groq / Gemini / OpenAI LLM APIs"]
+    end
+
+    VercelCDN --> UI
+    UI <--> SockClient
+    SockClient <== "Persistent WebSocket (WSS)" ==> Render
+    UI <-- "REST API (HTTPS)" --> Render
+    Render <--> Atlas
+    Render --> Judge0
+    Render --> AI
+```
 
 ---
 
@@ -23,314 +153,174 @@ A real-time competitive coding platform where two players battle head-to-head on
 
 ```
 1v1-coding-arena/
-├── client/                    # React frontend
-│   ├── public/
-│   │   └── index.html
+├── client/                      # React frontend
+│   ├── public/                  # Assets, favicon, _redirects
 │   ├── src/
-│   │   ├── context/
-│   │   │   ├── AuthContext.js     # JWT auth state
-│   │   │   └── SocketContext.js   # Socket.IO connection
-│   │   ├── pages/
-│   │   │   ├── LoginPage.js
-│   │   │   ├── RegisterPage.js
-│   │   │   ├── LobbyPage.js       # Room creation/joining/queue
-│   │   │   ├── MatchPage.js       # The actual coding arena
-│   │   │   ├── ResultPage.js      # Winner/draw screen
-│   │   │   ├── LeaderboardPage.js
-│   │   │   └── DashboardPage.js   # Match history
-│   │   ├── components/
-│   │   │   └── Navbar.js
-│   │   ├── App.js
-│   │   ├── index.js
-│   │   └── index.css
-│   ├── package.json
-│   └── tailwind.config.js
-│
-├── server/                    # Node.js backend
-│   ├── controllers/
-│   │   ├── authController.js
-│   │   ├── matchController.js
-│   │   └── leaderboardController.js
-│   ├── middleware/
-│   │   ├── auth.js            # JWT middleware
-│   │   └── errorHandler.js
-│   ├── models/
-│   │   ├── User.js            # User + ELO + stats
-│   │   ├── Match.js           # Match record
-│   │   └── Question.js        # Coding problems
-│   ├── routes/
-│   │   ├── auth.js
-│   │   ├── match.js
-│   │   ├── leaderboard.js
-│   │   └── question.js
-│   ├── socket/
-│   │   └── socketHandler.js   # ALL Socket.IO events
-│   ├── utils/
-│   │   ├── helpers.js         # ELO calc, room ID gen, etc.
-│   │   └── judge0.js          # Code execution API
-│   ├── seed.js                # Database seeder
-│   ├── index.js               # Server entry point
+│   │   ├── components/          # Navbar, Footer, Modal, Timer
+│   │   ├── context/             # AuthContext, SocketContext
+│   │   ├── pages/               # Arena, Interview, Dashboard, Lobby, Questions
+│   │   ├── utils/               # API clients, helpers
+│   │   ├── App.js               # Route declarations & Protected Routes
+│   │   └── index.css            # Custom CSS animations & Tailwind utilities
+│   ├── vercel.json              # Vercel SPA rewrite configuration
 │   └── package.json
 │
+├── server/                      # Node.js + Express backend
+│   ├── controllers/             # Auth, Match, Question, Leaderboard, Daily
+│   ├── middleware/              # JWT verification, CORS, error handling
+│   ├── models/                  # User, Match, Question, DailyChallenge schemas
+│   ├── routes/                  # REST API endpoints
+│   ├── services/                # Daily challenge cron & evaluation services
+│   ├── socket/                  # Socket.IO room, matchmaking, and duel handlers
+│   ├── utils/                   # ELO calculator, Judge0 client
+│   ├── index.js                 # HTTP + WebSocket server bootstrap
+│   └── package.json
+│
+├── docs/
+│   └── screenshots/             # Production UI showcase screenshots
+├── render.yaml                  # Render deployment blueprint
 └── README.md
 ```
 
 ---
 
-## ⚙️ Setup Instructions (Step by Step)
+## 🚀 Quick Start
 
-### Prerequisites
-
-Make sure you have installed:
-- **Node.js** (v16 or higher) — [Download here](https://nodejs.org)
-- **MongoDB** — Either install locally or use [MongoDB Atlas](https://www.mongodb.com/atlas) (free tier)
-- **Judge0 API Key** — Get one free at [RapidAPI Judge0](https://rapidapi.com/judge0-official/api/judge0-ce)
+### 📋 Prerequisites
+- [Node.js](https://nodejs.org) (v18 or higher recommended)
+- [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) or local MongoDB instance
+- [RapidAPI Judge0 API Key](https://rapidapi.com/judge0-official/api/judge0-ce) *(optional, fallback mock runner built-in)*
+- [Groq](https://groq.com) or [OpenAI](https://openai.com) API Key *(for AI Mock Interview features)*
 
 ---
 
-### Step 1: Clone / Download the project
+### 1️⃣ Clone the Repository
 
 ```bash
+git clone https://github.com/TechOrAlfaiz/1v1-Coding_Arena.git
 cd 1v1-coding-arena
 ```
 
 ---
 
-### Step 2: Set up the Server
+### 2️⃣ Backend Setup
 
 ```bash
-# Navigate to server folder
 cd server
-
-# Install dependencies
 npm install
-
-# Create your .env file
-cp .env.example .env
 ```
 
-Now edit `server/.env` with your actual values:
+Create a `.env` file in the `server/` directory:
 
 ```env
 PORT=5000
-MONGODB_URI=mongodb://localhost:27017/coding_arena   # or your Atlas URI
-JWT_SECRET=some_long_random_string_here_123456789
-JUDGE0_API_URL=https://judge0-ce.p.rapidapi.com
-JUDGE0_API_KEY=your_rapidapi_key_here
-JUDGE0_API_HOST=judge0-ce.p.rapidapi.com
+NODE_ENV=development
 CLIENT_URL=http://localhost:3000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_super_secret_key
+RAPIDAPI_KEY=your_rapidapi_judge0_key
+GROQ_API_KEY=your_groq_or_llm_key
 ```
 
----
-
-### Step 3: Seed the Database
-
-This adds 5 sample coding questions:
+Seed the database with default problems and start the server:
 
 ```bash
-# Make sure MongoDB is running first!
 node seed.js
-```
-
-You should see:
-```
-✅ Connected to MongoDB
-✅ Seeded 5 questions successfully!
+npm run dev
 ```
 
 ---
 
-### Step 4: Start the Server
+### 3️⃣ Frontend Setup
 
 ```bash
-# In the server/ directory:
-npm run dev     # uses nodemon (auto-restarts on changes)
-# OR
-npm start       # production start
-```
-
-You should see:
-```
-✅ MongoDB connected successfully
-🚀 Server running on http://localhost:5000
-🎮 Socket.IO ready for connections
-```
-
----
-
-### Step 5: Set up the Client
-
-```bash
-# Open a NEW terminal window
-cd client
-
-# Install dependencies
+cd ../client
 npm install
-
-# Create your .env file
-cp .env.example .env
 ```
 
-`client/.env` should contain:
+Create a `.env` file in the `client/` directory:
+
 ```env
 REACT_APP_SERVER_URL=http://localhost:5000
 REACT_APP_SOCKET_URL=http://localhost:5000
 ```
 
----
-
-### Step 6: Start the Client
+Start the React development server:
 
 ```bash
-# In the client/ directory:
 npm start
 ```
 
-The app opens at **http://localhost:3000** 🎉
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-### Step 7: Test It!
+## 🌐 Production Deployment
 
-1. Open **two different browser windows** (or use incognito)
-2. Register two different accounts
-3. In Window 1: Click **Create Room**
-4. Copy the Room ID (e.g., `X7K2M9`)
-5. In Window 2: Click **Join Room**, paste the Room ID
-6. Both windows will enter the match — start coding!
+### Frontend (Vercel)
+1. Import the repository into [Vercel](https://vercel.com).
+2. Set the Root Directory to `client`.
+3. Add environment variables:
+   - `REACT_APP_SERVER_URL`: `https://coding-arena-api.onrender.com`
+   - `REACT_APP_SOCKET_URL`: `https://coding-arena-api.onrender.com`
+4. Deploy! Rewrites in `client/vercel.json` handle SPA routing automatically.
 
----
-
-## 🔌 Socket.IO Events Reference
-
-### Client → Server
-
-| Event | Payload | Description |
-|-------|---------|-------------|
-| `join_room` | `{ roomId }` | Player joins a room (triggers match start if 2 players) |
-| `code_submit` | `{ roomId, code, language }` | Submit code for judging |
-| `run_code` | `{ roomId, code, language, customInput }` | Run code without submitting |
-| `typing_indicator` | `{ roomId, isTyping }` | Broadcast typing status to opponent |
-| `join_queue` | — | Enter matchmaking queue |
-| `leave_queue` | — | Leave matchmaking queue |
-
-### Server → Client
-
-| Event | Payload | Description |
-|-------|---------|-------------|
-| `room_update` | `{ playerCount, players, status }` | Room state changed |
-| `start_match` | `{ question, players, duration }` | Match is starting — receive the question |
-| `timer_sync` | `{ timeLeft }` | Timer tick (every second) |
-| `submission_result` | `{ passed, results, isWinner, error }` | Your submission result |
-| `match_result` | `{ result, winner, eloChanges, reason }` | Match over |
-| `player_submitting` | `{ username }` | An opponent is submitting |
-| `opponent_wrong_answer` | `{ username }` | Opponent got wrong answer |
-| `opponent_typing` | `{ username, isTyping }` | Opponent typing status |
-| `opponent_disconnected` | `{ username }` | Opponent left |
-| `match_found` | `{ roomId, opponent }` | Matchmaking found you an opponent |
+### Backend (Render)
+1. Create a **Web Service** on [Render](https://render.com) connected to the GitHub repository.
+2. Configure settings:
+   - **Root Directory:** `server`
+   - **Build Command:** `npm install`
+   - **Start Command:** `node index.js`
+3. Add environment variables: `MONGO_URI`, `JWT_SECRET`, `NODE_ENV=production`, `CLIENT_URL=https://client-rust-kappa-90.vercel.app`, `RAPIDAPI_KEY`, and `GROQ_API_KEY`.
+4. Deploy! Render maintains long-running WebSocket connections required for live 1v1 duels.
 
 ---
 
-## 🌐 REST API Reference
+## 📡 Core API & WebSocket Protocol
 
-### Auth
-
-| Method | Endpoint | Body | Description |
-|--------|----------|------|-------------|
-| POST | `/api/auth/register` | `{username, email, password}` | Register |
-| POST | `/api/auth/login` | `{email, password}` | Login, returns JWT |
-| GET | `/api/auth/me` | — (auth required) | Get current user |
-
-### Matches
+### REST Endpoints
 
 | Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/matches/create` | Create a new room |
-| POST | `/api/matches/join/:roomId` | Join a room |
-| GET | `/api/matches/history` | Get your match history |
-| GET | `/api/matches/:roomId` | Get match details |
+| :--- | :--- | :--- |
+| `POST` | `/api/auth/register` | Create a new user account |
+| `POST` | `/api/auth/login` | Authenticate user & return JWT token |
+| `GET` | `/api/questions` | Query company-tagged DSA questions with pagination |
+| `GET` | `/api/daily` | Fetch today's featured challenge & timer countdown |
+| `GET` | `/api/leaderboard` | Retrieve global gladiators ranked by ELO |
+| `GET` | `/api/health` | Service uptime and health check |
 
-### Leaderboard
+### Real-Time Socket.IO Events
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/leaderboard` | Get top 50 players |
-| GET | `/api/leaderboard/rank/:userId` | Get specific player's rank |
-
----
-
-## 📦 Judge0 API Setup
-
-1. Go to [RapidAPI — Judge0 CE](https://rapidapi.com/judge0-official/api/judge0-ce)
-2. Sign up for a free account
-3. Subscribe to the **Basic** plan (free, 50 requests/day)
-4. Copy your **API Key** from the dashboard
-5. Paste it in `server/.env` as `JUDGE0_API_KEY`
-
-> **Note**: The free tier has a limit of 50 requests/day. For production use, consider self-hosting Judge0 or upgrading your plan.
-
-### Self-hosting Judge0 (Optional)
-
-If you want unlimited code execution locally:
-```bash
-# Requires Docker
-git clone https://github.com/judge0/judge0.git
-cd judge0
-cp judge0.conf.example judge0.conf
-docker-compose up
-```
-Then set `JUDGE0_API_URL=http://localhost:2358` and remove the API key headers in `server/utils/judge0.js`.
+| Event | Direction | Payload / Purpose |
+| :--- | :--- | :--- |
+| `create_room` | Client ➔ Server | Create a private 1v1 match room |
+| `join_room` | Client ➔ Server | Join an existing room via Room ID |
+| `match_found` | Server ➔ Client | Notifies matched players and sends problem |
+| `timer_sync` | Server ➔ Client | Synchronizes match countdown for both players |
+| `code_change` | Bidirectional | Real-time code sync & typing indicators |
+| `submit_code` | Client ➔ Server | Submits code for execution and evaluation |
+| `match_ended` | Server ➔ Client | Declares match winner, draw, and ELO rating changes |
 
 ---
 
-## 🏆 ELO Rating System
+## 🤝 Contributing
 
-The app uses the standard chess ELO formula:
+Contributions are welcome! If you'd like to improve the platform:
 
-- **Starting ELO**: 1200 (like chess)
-- **K-Factor**: 40 (new players, < 10 games), 32 (regular), 24 (experienced, 30+ games)
-- **Win**: ~+20-30 ELO (depends on opponent's rating)
-- **Loss**: ~-20-30 ELO
-- **Draw**: Small adjustment based on expected outcome
-- **Minimum ELO**: 100
-
-**Tier System:**
-| Tier | ELO Range |
-|------|-----------|
-| Bronze | < 1000 |
-| Silver | 1000–1199 |
-| Gold | 1200–1399 |
-| Platinum | 1400–1599 |
-| Diamond | 1600–1799 |
-| Master | 1800–1999 |
-| Grandmaster | 2000+ |
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ---
 
-## 🔧 Troubleshooting
+## 📜 License
 
-**"Cannot connect to MongoDB"**
-→ Make sure MongoDB is running: `mongod` or start it via MongoDB Compass
-
-**"Judge0 API key invalid"**
-→ Check your `.env` file. Make sure there are no extra spaces around the key.
-
-**"Room not found"**
-→ Room IDs are case-sensitive and 6 characters. Make sure both players have the same ID.
-
-**Socket not connecting**
-→ Make sure the server is running on port 5000, and `REACT_APP_SOCKET_URL` points to it.
-
-**"No questions available"**
-→ Run `node seed.js` in the server directory.
+Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
-## 🚀 Deployment Notes
-
-For production deployment:
-1. Build the React app: `cd client && npm run build`
-2. Serve the `build/` folder from Express (add static file serving)
-3. Use MongoDB Atlas for the database
-4. Set proper `NODE_ENV=production` and update `CLIENT_URL`
-5. Use a process manager like **PM2**: `pm2 start server/index.js`
+<div align="center">
+  <sub>Engineered with ⚡ for competitive coders worldwide. Star ⭐ this repository if you find it helpful!</sub>
+</div>
